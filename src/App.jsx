@@ -10,6 +10,7 @@ import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
 import Shipping from "./pages/Shipping";
 import Login from "./pages/Login";
+import Register from "./pages/Register"
 
 export default function App() {
   return (
@@ -30,6 +31,7 @@ export default function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/shipping" element={<Shipping />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={< Register/>}/>
         </Routes>
       </div>
     </div>

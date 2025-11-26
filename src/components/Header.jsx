@@ -94,18 +94,28 @@ export default function Header() {
       }}
     >
       {/* Logo */}
-      <h2
-        style={{
-          fontFamily: "'Playfair Display', serif",
-          fontSize: "30px",
-          letterSpacing: "2px",
-          color: "#ffcc70",
-          margin: "0",
-          textShadow: "0px 0px 8px rgba(255,204,112,0.4)",
-        }}
-      >
-        ArtLoom
-      </h2>
+    <h2
+  onClick={() => navigate("/")} // navigate to Home
+  style={{
+    fontFamily: "'Playfair Display', serif",
+    fontSize: "30px",
+    letterSpacing: "2px",
+    color: "#ffcc70",
+    margin: "0",
+    textShadow: "0px 0px 8px rgba(255,204,112,0.4)",
+    cursor: "pointer", // pointer on hover
+    transition: "0.3s",
+  }}
+  onMouseEnter={(e) => {
+    e.target.style.color = "#fff";
+  }}
+  onMouseLeave={(e) => {
+    e.target.style.color = "#ffcc70";
+  }}
+>
+  ArtLoom
+</h2>
+
 
       {/* Navigation */}
       <nav style={{ display: "flex", gap: "25px" }}>
