@@ -1,37 +1,41 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { useAuth } from "./AuthContext";
 
 const WishlistContext = createContext();
 
-export function WishlistProvider({ children }) {
-  // Load wishlist from LocalStorage on first render
-  const [wishlist, setWishlist] = useState(() => {
-    const saved = localStorage.getItem("wishlist");
-    return saved ? JSON.parse(saved) : [];
-  });
+export const WishlistProvider = ({ children }) => {
+  const { user, refreshKey } = useAuth();
+  const [wishlist, setWishlist] = useState([]);
 
-  // Save wishlist to LocalStorage whenever it changes
   useEffect(() => {
-    localStorage.setItem("wishlist", JSON.stringify(wishlist));
-  }, [wishlist]);
+    if (!user) {
+      setWishlist([]); // logout → instant clear
+      return;
+    }
 
-  const addToWishlist = (product) => {
-    setWishlist((prev) => {
-      if (prev.find((p) => p.id === product.id)) return prev; // avoid duplicates
-      return [...prev, product];
-    });
+    const saved = JSON.parse(localStorage.getItem(`wishlist_${user.id}`)) || [];
+    setWishlist(saved);
+  }, [user, refreshKey]); // 🔥 user changes + refreshKey triggers reloading
+
+  const addToWishlist = (item) => {
+    if (!user) return alert("Please login first");
+
+    const updated = [...wishlist, item];
+    setWishlist(updated);
+    localStorage.setItem(`wishlist_${user.id}`, JSON.stringify(updated));
   };
 
   const removeFromWishlist = (id) => {
-    setWishlist((prev) => prev.filter((item) => item.id !== id));
+    const updated = wishlist.filter((item) => item.id !== id);
+    setWishlist(updated);
+    localStorage.setItem(`wishlist_${user.id}`, JSON.stringify(updated));
   };
 
   return (
-    <WishlistContext.Provider
-      value={{ wishlist, addToWishlist, removeFromWishlist }}
-    >
+    <WishlistContext.Provider value={{ wishlist, addToWishlist, removeFromWishlist }}>
       {children}
     </WishlistContext.Provider>
   );
-}
+};
 
 export const useWishlist = () => useContext(WishlistContext);

@@ -1,32 +1,47 @@
-import { createContext, useContext, useState, useEffect } from "react";
+// CartContext.jsx
+import { createContext, useContext, useEffect, useState } from "react";
+import { useAuth } from "./AuthContext";
 
 const CartContext = createContext();
 
-export function CartProvider({ children }) {
-  // Load from LocalStorage
-  const [cart, setCart] = useState(() => {
-    const saved = localStorage.getItem("cart");
-    return saved ? JSON.parse(saved) : [];
-  });
+export const CartProvider = ({ children }) => {
+  const { user, refreshKey } = useAuth();
+  const [cart, setCart] = useState([]);
 
-  // Save cart to LocalStorage whenever cart changes
+  // Load cart when user logs in OR refreshKey changes
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
-
-  const addToCart = (product) => {
-    const exists = cart.find((item) => item.id === product.id);
-    if (!exists) {
-      setCart([...cart, product]);
+    if (!user) {
+      setCart([]); // logout → clear instantly
+      return;
     }
+
+    const saved = JSON.parse(localStorage.getItem(`cart_${user.id}`)) || [];
+    setCart(saved);
+  }, [user, refreshKey]);
+
+  const saveCart = (updatedCart) => {
+    if (!user) return;
+    setCart(updatedCart);
+    localStorage.setItem(`cart_${user.id}`, JSON.stringify(updatedCart));
+  };
+
+  const addToCart = (item) => {
+    if (!user) return alert("Please login first");
+
+    const exists = cart.find((p) => p.id === item.id);
+    if (exists) return alert("Already in cart");
+
+    const updated = [...cart, item];
+    saveCart(updated);
   };
 
   const removeFromCart = (id) => {
-    setCart(cart.filter((item) => item.id !== id));
+    const updated = cart.filter((item) => item.id !== id);
+    saveCart(updated);
   };
 
   const clearCart = () => {
-    setCart([]);
+    saveCart([]);
   };
 
   return (
@@ -34,6 +49,6 @@ export function CartProvider({ children }) {
       {children}
     </CartContext.Provider>
   );
-}
+};
 
 export const useCart = () => useContext(CartContext);

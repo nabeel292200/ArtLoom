@@ -8,36 +8,49 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Show success toast
-    toast.success("Login Successful!", {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
+    try {
+      const res = await fetch(`http://localhost:3001/users?email=${email}`);
+      const data = await res.json();
 
-    // Navigate to home after a short delay to allow toast to show
-    setTimeout(() => {
-      navigate("/");
-    }, 1000);
+      if (data.length === 0) {
+        toast.error("User not found!", { autoClose: 2000 });
+        return;
+      }
+
+      const user = data[0];
+
+      if (user.password !== password) {
+        toast.error("Incorrect password!", { autoClose: 2000 });
+        return;
+      }
+
+      // Save user info in localStorage
+      localStorage.setItem("user", JSON.stringify(user));
+
+      toast.success("Login Successful!", { autoClose: 1500 });
+
+      setTimeout(() => {
+        navigate("/");
+      }, 1500);
+
+    } catch (error) {
+      toast.error("Something went wrong!");
+      console.log(error);
+    }
   };
 
   return (
     <>
-      {/* Toast Container */}
       <ToastContainer />
 
       <div
         className="flex justify-center items-center min-h-screen bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage:
-            "url('https://img.freepik.com/free-photo/abstract-colorful-watercolor-card_23-2147835862.jpg?t=st=1764058237~exp=1764061837~hmac=56627827b1883ed2cd2de04779480bc7a8faf82c3d5aa10a35766b42e4d62823&w=1480')",
+            "url('https://img.freepik.com/free-photo/abstract-colorful-watercolor-card_23-2147835862.jpg')",
         }}
       >
         <div className="bg-white/80 backdrop-blur-md p-8 rounded-2xl shadow-2xl w-[90%] max-w-md">

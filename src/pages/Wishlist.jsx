@@ -10,8 +10,10 @@ export default function Wishlist() {
   const handleAddToCart = (product, e) => {
     e.preventDefault();
     e.stopPropagation();
-    addToCart(product);
-    // Optional: Show success message
+
+    addToCart(product);          
+    removeFromWishlist(product.id);   // ✅ REMOVE FROM WISHLIST when added to cart
+
     alert(`${product.title} added to cart!`);
   };
 
@@ -26,6 +28,7 @@ export default function Wishlist() {
   return (
     <div className="min-h-screen bg-gray-100 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-3">Your Wishlist</h1>
@@ -59,6 +62,7 @@ export default function Wishlist() {
                 className="block"
               >
                 <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer group">
+
                   {/* Image Container */}
                   <div className="relative overflow-hidden">
                     <img
@@ -66,8 +70,8 @@ export default function Wishlist() {
                       alt={product.title}
                       className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
                     />
-                    
-                    {/* Wishlist Remove Button */}
+
+                    {/* Remove Button */}
                     <button
                       onClick={(e) => handleRemoveFromWishlist(product.id, e)}
                       className="absolute top-3 right-3 p-2 bg-white/90 rounded-full shadow-md hover:scale-110 transition-all duration-200 group/remove"
@@ -80,7 +84,7 @@ export default function Wishlist() {
                       {product.category}
                     </span>
                   </div>
-                  
+
                   {/* Product Info */}
                   <div className="p-5">
                     <h3 className="font-semibold text-gray-800 mb-2 line-clamp-2 group-hover:text-amber-600 transition-colors h-14">
@@ -90,7 +94,7 @@ export default function Wishlist() {
                     <p className="text-gray-600 text-sm mb-2 line-clamp-1">
                       By {product.author}
                     </p>
-                    
+
                     <div className="flex items-center justify-between mb-3">
                       <span className="text-2xl font-bold text-amber-600">
                         ${product.price}
@@ -108,6 +112,7 @@ export default function Wishlist() {
                       <FaShoppingCart className="group-hover/cart:scale-110 transition-transform" />
                       <span>Add to Cart</span>
                     </button>
+
                   </div>
                 </div>
               </Link>
@@ -115,7 +120,7 @@ export default function Wishlist() {
           </div>
         )}
 
-        {/* Additional Actions when wishlist has items */}
+        {/* Clear All */}
         {wishlist.length > 0 && (
           <div className="mt-12 text-center">
             <div className="bg-white rounded-xl shadow-sm p-6 max-w-2xl mx-auto">
@@ -123,12 +128,14 @@ export default function Wishlist() {
                 Love your collection?
               </h3>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
+
                 <Link
                   to="/"
                   className="bg-gray-800 text-white py-3 px-8 rounded-lg font-semibold hover:bg-gray-900 transition-colors"
                 >
                   Continue Shopping
                 </Link>
+
                 <button
                   onClick={() => {
                     if (window.confirm("Are you sure you want to clear your entire wishlist?")) {
@@ -139,10 +146,12 @@ export default function Wishlist() {
                 >
                   Clear All Items
                 </button>
+
               </div>
             </div>
           </div>
         )}
+
       </div>
     </div>
   );

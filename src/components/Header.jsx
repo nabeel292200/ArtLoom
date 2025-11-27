@@ -1,17 +1,35 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FaHeart, FaShoppingCart, FaTruck, FaUser } from "react-icons/fa";
 import { useState, useEffect } from "react";
+import { useWishlist } from "../context/WishlistContext"; // ✅ wishlist context
+import { useCart } from "../context/CartContext"; // ✅ cart context
 
 export default function Header() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Track active path for instant update
+  const { wishlist } = useWishlist(); // ✅ live wishlist
+  const { cart } = useCart(); // ✅ live cart
+
   const [activePath, setActivePath] = useState(location.pathname);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
   useEffect(() => {
-    setActivePath(location.pathname); // sync with route changes
+    setActivePath(location.pathname);
+
+    // Check login state from localStorage
+    const user = JSON.parse(localStorage.getItem("user"));
+    setLoggedIn(!!user);
+    setLoggedInUser(user);
   }, [location.pathname]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setLoggedIn(false);
+    setLoggedInUser(null);
+    navigate("/login");
+  };
 
   const navLinks = [
     { path: "/", text: "HOME" },
@@ -21,8 +39,58 @@ export default function Header() {
   ];
 
   const iconButtons = [
-    { icon: <FaHeart size={20} />, path: "/Wishlist", title: "Wishlist" },
-    { icon: <FaShoppingCart size={20} />, path: "/Cart", title: "Cart" },
+    {
+      icon: (
+        <div style={{ position: "relative" }}>
+          <FaHeart size={20} />
+          {wishlist.length > 0 && (
+            <span
+              style={{
+                position: "absolute",
+                top: "-8px",
+                right: "-10px",
+                background: "red",
+                color: "#fff",
+                fontSize: "12px",
+                padding: "2px 6px",
+                borderRadius: "50%",
+                fontWeight: "bold",
+              }}
+            >
+              {wishlist.length}
+            </span>
+          )}
+        </div>
+      ),
+      path: "/Wishlist",
+      title: "Wishlist",
+    },
+    {
+      icon: (
+        <div style={{ position: "relative" }}>
+          <FaShoppingCart size={20} />
+          {cart.length > 0 && (
+            <span
+              style={{
+                position: "absolute",
+                top: "-8px",
+                right: "-10px",
+                background: "red",
+                color: "#fff",
+                fontSize: "12px",
+                padding: "2px 6px",
+                borderRadius: "50%",
+                fontWeight: "bold",
+              }}
+            >
+              {cart.length}
+            </span>
+          )}
+        </div>
+      ),
+      path: "/Cart",
+      title: "Cart",
+    },
     { icon: <FaTruck size={20} />, path: "/Shipping", title: "Shipping" },
   ];
 
@@ -48,7 +116,7 @@ export default function Header() {
       <h2
         onClick={() => {
           navigate("/");
-          setActivePath("/"); // instant update
+          setActivePath("/");
         }}
         style={{
           fontFamily: "'Playfair Display', serif",
@@ -56,12 +124,9 @@ export default function Header() {
           letterSpacing: "2px",
           color: "#ffcc70",
           margin: "0",
-          textShadow: "0px 0px 8px rgba(255,204,112,0.4)",
           cursor: "pointer",
           transition: "0.3s",
         }}
-        onMouseEnter={(e) => (e.target.style.color = "#fff")}
-        onMouseLeave={(e) => (e.target.style.color = "#ffcc70")}
       >
         ArtLoom
       </h2>
@@ -72,24 +137,15 @@ export default function Header() {
           <Link
             key={text}
             to={path}
-            onClick={() => setActivePath(path)} // instant update
+            onClick={() => setActivePath(path)}
             style={{
               color: isActive(path) ? "#000" : "#fff",
               background: isActive(path) ? "#ffcc70" : "transparent",
               textDecoration: "none",
               fontSize: "15px",
-              fontWeight: "500",
               padding: "6px 14px",
               borderRadius: "20px",
               transition: "0.3s",
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.background = "#ffcc70";
-              e.target.style.color = "#000";
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.background = isActive(path) ? "#ffcc70" : "transparent";
-              e.target.style.color = isActive(path) ? "#000" : "#fff";
             }}
           >
             {text}
@@ -97,57 +153,84 @@ export default function Header() {
         ))}
       </nav>
 
-      {/* Icons Section */}
+      {/* Right Section */}
       <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+        {/* Icons */}
         {iconButtons.map(({ icon, path, title }) => (
           <div
             key={title}
-            title={title}
             onClick={() => {
               navigate(path);
-              setActivePath(path); // instant update
+              setActivePath(path);
             }}
             style={{
               cursor: "pointer",
               color: isActive(path) ? "#ffcc70" : "#fff",
               transition: "0.3s",
             }}
-            onMouseEnter={(e) => (e.target.style.color = "#ffcc70")}
-            onMouseLeave={(e) => (e.target.style.color = isActive(path) ? "#ffcc70" : "#fff")}
           >
             {icon}
           </div>
         ))}
 
-        {/* Login Button */}
-        <button
-          onClick={() => {
-            navigate("/login");
-            setActivePath("/login"); // instant update
-          }}
-          style={{
-            padding: "6px 16px",
-            background: isActive("/login") ? "#fff" : "#ffcc70",
-            border: "none",
-            borderRadius: "18px",
-            color: "#000",
-            fontWeight: "600",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            gap: "6px",
-            transition: "0.3s",
-          }}
-          onMouseEnter={(e) => {
-            e.target.style.background = "#fff";
-            e.target.style.color = "#000";
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.background = isActive("/login") ? "#fff" : "#ffcc70";
-          }}
-        >
-          <FaUser size={16} /> Login
-        </button>
+        {/* Greeting + Logout */}
+        {loggedIn ? (
+          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+            <span
+              style={{
+                fontWeight: "600",
+                fontSize: "15px",
+                color: "#ffcc70",
+              }}
+            >
+              Hi, {loggedInUser?.name}
+            </span>
+
+            <button
+              onClick={handleLogout}
+              style={{
+                padding: "6px 16px",
+                background: "red",
+                border: "none",
+                borderRadius: "18px",
+                color: "#fff",
+                fontWeight: "600",
+                cursor: "pointer",
+              }}
+            >
+              Logout
+            </button>
+          </div>
+        ) : (
+          <button
+            onClick={() => {
+              navigate("/login");
+              setActivePath("/login");
+            }}
+            style={{
+              padding: "6px 16px",
+              background: isActive("/login") ? "#fff" : "#ffcc70",
+              border: "none",
+              borderRadius: "18px",
+              color: "#000",
+              fontWeight: "600",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+              transition: "0.3s",
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.background = "#fff";
+              e.target.style.color = "#000";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.background = isActive("/login") ? "#fff" : "#ffcc70";
+            }}
+          >
+            <FaUser size={16} /> Login
+          </button>
+        )}
       </div>
     </header>
   );

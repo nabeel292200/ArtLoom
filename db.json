@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "name": "John Doe",
       "email": "john@example.com",
       "password": "123456"
@@ -11,11 +11,35 @@
       "name": "nabeel",
       "email": "nabeel1@gmail.com",
       "password": "1234"
+    },
+    {
+      "id": "0c03",
+      "name": "ashfakk",
+      "email": "ashf@gmail.com",
+      "password": "1234"
+    },
+    {
+      "id": "68d9",
+      "name": "haifa",
+      "email": "h@gmail.com",
+      "password": "h1"
+    },
+    {
+      "id": "2683",
+      "name": "irfan",
+      "email": "i@gmail.com",
+      "password": "i"
+    },
+    {
+      "id": "8b23",
+      "name": "nabeel",
+      "email": "n@gmail.com",
+      "password": "n"
     }
   ],
   "products": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Sunlit Garden",
       "author": "Lorenzo Moretti",
       "category": "Impressionism",
@@ -25,7 +49,7 @@
       "description": "A warm and vibrant impressionist painting capturing the golden sunlight over a peaceful Italian garden."
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Silent Waves",
       "author": "Akira Tanaka",
       "category": "Modern Art",
@@ -35,7 +59,7 @@
       "description": "A minimal yet powerful expression of calm waves using cool tones and abstract strokes."
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "Autumn Streets",
       "author": "Elena Petrova",
       "category": "Realism",
@@ -45,7 +69,7 @@
       "description": "A realistic street-view painting portraying autumn colors and quiet evening lights."
     },
     {
-      "id": 4,
+      "id": "4",
       "title": "The Red Horizon",
       "author": "Mateo Delgado",
       "category": "Abstract",
@@ -55,7 +79,7 @@
       "description": "A bold abstract piece exploring emotional contrasts through red and dark geometric shapes."
     },
     {
-      "id": 5,
+      "id": "5",
       "title": "Blue Echo",
       "author": "Amélie Dupont",
       "category": "Contemporary",
@@ -65,7 +89,7 @@
       "description": "Soft contemporary gradients and layered brush textures create a soothing blue composition."
     },
     {
-      "id": 6,
+      "id": "6",
       "title": "Forest Spirits",
       "author": "Sven Johansson",
       "category": "Nature Art",
@@ -75,7 +99,7 @@
       "description": "A mystical depiction of Scandinavian forests blending realism with fantasy elements."
     },
     {
-      "id": 7,
+      "id": "7",
       "title": "Golden Mirage",
       "author": "Yusuf Al-Rahman",
       "category": "Surrealism",
@@ -85,7 +109,7 @@
       "description": "A surreal vision of a golden desert mirage merging dreamlike shapes with shifting sands."
     },
     {
-      "id": 8,
+      "id": "8",
       "title": "Urban Rhythm",
       "author": "Sofia Novak",
       "category": "Urban Art",
@@ -95,7 +119,7 @@
       "description": "Energetic strokes and bright contrasts bring the rhythm of city life onto the canvas."
     },
     {
-      "id": 9,
+      "id": "9",
       "title": "Mountain Breath",
       "author": "Dimitri Kalov",
       "category": "Landscape",
@@ -105,7 +129,7 @@
       "description": "A peaceful representation of mountain ranges at dawn with soft pastel colors."
     },
     {
-      "id": 10,
+      "id": "10",
       "title": "Whispers of Night",
       "author": "Isabella Romano",
       "category": "Fantasy Art",
@@ -115,7 +139,7 @@
       "description": "A dreamy night-sky fantasy painting filled with glowing stars and mystical silhouettes."
     },
     {
-      "id": 11,
+      "id": "11",
       "title": "Dreaming in Colors",
       "author": "Hana Lee",
       "category": "Expressionism",
@@ -125,7 +149,7 @@
       "description": "A colorful emotional artwork blending vibrant shapes and fantasies in expressive style."
     },
     {
-      "id": 12,
+      "id": "12",
       "title": "Wings of Light",
       "author": "Carlos Mendes",
       "category": "Fantasy Art",
@@ -133,6 +157,50 @@
       "place": "Lisbon, Portugal",
       "image": "https://img.freepik.com/premium-photo/girl-painting-autumn-scenery-wall_1148167-98983.jpg?w=2000",
       "description": "An inspiring fantasy angel art symbolizing hope and freedom through radiant light wings."
+    }
+  ],
+  "orders": [
+    {
+      "id": "ede1",
+      "title": "Silent Waves",
+      "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
+      "price": 2200,
+      "status": "Pending"
+    },
+    {
+      "id": "7805",
+      "title": "Silent Waves",
+      "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
+      "price": 2200,
+      "status": "Pending"
+    },
+    {
+      "id": "323c",
+      "title": "Silent Waves",
+      "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
+      "price": 2200,
+      "status": "Pending"
+    },
+    {
+      "id": "e01d",
+      "title": "Silent Waves",
+      "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
+      "price": 2200,
+      "status": "Pending"
+    },
+    {
+      "id": "684b",
+      "title": "Silent Waves",
+      "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
+      "price": 2200,
+      "status": "Pending"
+    },
+    {
+      "id": "a63d",
+      "title": "Autumn Streets",
+      "image": "https://img.freepik.com/free-photo/enchanting-watercolor-fairy-illustration_23-2151557302.jpg?t=st=1763983610~exp=1763987210~hmac=f784bc0d8fb25726ba6cd214cd7f6e480ddd715350a2ac4540472e24bacbec32&w=740",
+      "price": 1500,
+      "status": "Pending"
     }
   ]
 }

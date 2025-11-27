@@ -1,51 +1,57 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FaCreditCard, FaMoneyBill, FaMobileAlt } from "react-icons/fa";
+import { useCart } from "../context/CartContext";
+import { toast } from "react-toastify";
 
-export default function Payment() {
+export default function Payment({ currentUserId }) {
   const location = useLocation();
   const navigate = useNavigate();
-
   const { cartItems, total } = location.state || { cartItems: [], total: 0 };
+  const { clearCart } = useCart();
 
   const [paymentMethod, setPaymentMethod] = useState("card");
+  const [loading, setLoading] = useState(false);
 
-  // -------------------------
-  // UPDATED handlePayment()
-  // -------------------------
-  const handlePayment = () => {
+  const handlePayment = async () => {
     if (cartItems.length === 0) {
-      alert("Your cart is empty!");
+      toast.error("Your cart is empty!");
       return;
     }
 
-    // Convert cart to order objects
-    const newOrders = cartItems.map((item) => ({
-      id: "ORD-" + Math.floor(Math.random() * 100000),
-      title: item.title,
-      image: item.image,
-      price: item.price,
-      status: "Pending",
-    }));
+    setLoading(true);
 
-    // Get existing orders
-    const existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
+    try {
+      // Convert cart items to order objects
+      const newOrders = cartItems.map(item => ({
+        userId: currentUserId,
+        title: item.title,
+        image: item.image,
+        price: item.price,
+        status: "Pending"
+      }));
 
-    // Save updated orders in localStorage
-    localStorage.setItem(
-      "orders",
-      JSON.stringify([...existingOrders, ...newOrders])
-    );
+      // Save each order in DB
+      for (let order of newOrders) {
+        const res = await fetch("http://localhost:3001/orders", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(order)
+        });
 
-    alert("Payment Successful!");
+        if (!res.ok) throw new Error("Failed to save order");
+      }
 
-    // Navigate to shipping page
-    navigate("/shipping", {
-      state: {
-        order: cartItems,
-        amountPaid: total,
-      },
-    });
+      clearCart(); // Clear cart after order
+      toast.success("Payment successful! Your orders have been placed.");
+      navigate("/shipping"); // Navigate to orders page
+
+    } catch (err) {
+      console.error(err);
+      toast.error("Payment failed! Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -61,32 +67,28 @@ export default function Payment() {
             <h3 className="text-lg font-semibold">Select Payment Method</h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-
-              {/* Card */}
               <button
                 onClick={() => setPaymentMethod("card")}
-                className={`p-4 border rounded-lg flex flex-col items-center gap-2 
-                 ${paymentMethod === "card" ? "border-amber-500 bg-amber-50" : "border-gray-300"}`}
+                className={`p-4 border rounded-lg flex flex-col items-center gap-2
+                  ${paymentMethod === "card" ? "border-amber-500 bg-amber-50" : "border-gray-300"}`}
               >
                 <FaCreditCard size={30} />
                 <span>Card</span>
               </button>
 
-              {/* UPI */}
               <button
                 onClick={() => setPaymentMethod("upi")}
                 className={`p-4 border rounded-lg flex flex-col items-center gap-2
-                 ${paymentMethod === "upi" ? "border-amber-500 bg-amber-50" : "border-gray-300"}`}
+                  ${paymentMethod === "upi" ? "border-amber-500 bg-amber-50" : "border-gray-300"}`}
               >
                 <FaMobileAlt size={30} />
                 <span>UPI</span>
               </button>
 
-              {/* COD */}
               <button
                 onClick={() => setPaymentMethod("cod")}
                 className={`p-4 border rounded-lg flex flex-col items-center gap-2
-                 ${paymentMethod === "cod" ? "border-amber-500 bg-amber-50" : "border-gray-300"}`}
+                  ${paymentMethod === "cod" ? "border-amber-500 bg-amber-50" : "border-gray-300"}`}
               >
                 <FaMoneyBill size={30} />
                 <span>Cash on Delivery</span>
@@ -94,47 +96,27 @@ export default function Payment() {
             </div>
           </div>
 
-          {/* CARD FORM */}
+          {/* Card Form */}
           {paymentMethod === "card" && (
             <div className="space-y-4">
-              <input
-                type="text"
-                placeholder="Card Holder Name"
-                className="w-full border p-3 rounded-lg"
-              />
-              <input
-                type="text"
-                placeholder="Card Number"
-                className="w-full border p-3 rounded-lg"
-              />
+              <input type="text" placeholder="Card Holder Name" className="w-full border p-3 rounded-lg" />
+              <input type="text" placeholder="Card Number" className="w-full border p-3 rounded-lg" />
               <div className="flex gap-4">
-                <input
-                  type="text"
-                  placeholder="MM/YY"
-                  className="w-1/2 border p-3 rounded-lg"
-                />
-                <input
-                  type="password"
-                  placeholder="CVV"
-                  className="w-1/2 border p-3 rounded-lg"
-                />
+                <input type="text" placeholder="MM/YY" className="w-1/2 border p-3 rounded-lg" />
+                <input type="password" placeholder="CVV" className="w-1/2 border p-3 rounded-lg" />
               </div>
             </div>
           )}
 
-          {/* UPI FORM */}
+          {/* UPI Form */}
           {paymentMethod === "upi" && (
             <div className="space-y-4">
-              <input
-                type="text"
-                placeholder="Enter UPI ID"
-                className="w-full border p-3 rounded-lg"
-              />
+              <input type="text" placeholder="Enter UPI ID" className="w-full border p-3 rounded-lg" />
               <p className="text-gray-500 text-sm">Example: username@upi</p>
             </div>
           )}
 
-          {/* COD INFO */}
+          {/* COD Info */}
           {paymentMethod === "cod" && (
             <p className="text-gray-600">
               You will pay the amount upon delivery.
@@ -144,10 +126,11 @@ export default function Payment() {
           {/* Pay Button */}
           <button
             onClick={handlePayment}
+            disabled={loading}
             className="mt-6 w-full bg-amber-500 text-white py-3 rounded-lg
-             hover:bg-amber-600 font-semibold text-lg"
+              hover:bg-amber-600 font-semibold text-lg disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Pay ${total.toFixed(2)}
+            {loading ? "Processing..." : `Pay $${total.toFixed(2)}`}
           </button>
         </div>
 
@@ -158,11 +141,7 @@ export default function Payment() {
           <div className="space-y-4">
             {cartItems.map((item) => (
               <div key={item.id} className="flex items-center gap-4 border-b pb-3">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-16 h-16 rounded-lg object-cover"
-                />
+                <img src={item.image} alt={item.title} className="w-16 h-16 rounded-lg object-cover" />
                 <div>
                   <p className="font-semibold">{item.title}</p>
                   <p className="text-sm text-gray-500">{item.author}</p>

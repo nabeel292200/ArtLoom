@@ -32,14 +32,17 @@ import App from "./App";
 import "./index.css";
 import { WishlistProvider } from "./context/WishlistContext";
 import { CartProvider } from "./context/CartContext";
+import { AuthProvider } from "./context/AuthContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
+  <AuthProvider>
     <WishlistProvider>
        <CartProvider>
       <App />
       </CartProvider>
     </WishlistProvider>
+</AuthProvider>
   </BrowserRouter>
 );
 

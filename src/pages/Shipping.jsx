@@ -1,28 +1,36 @@
 import { useState, useEffect } from "react";
 import { FaBoxOpen, FaTrash, FaCheckCircle, FaClock } from "react-icons/fa";
 
-export default function Orders() {
+export default function Orders({ currentUserId }) {
   const [orders, setOrders] = useState([]);
 
-  // Load from localStorage on start
+  // Load user-specific orders from localStorage
   useEffect(() => {
     const savedOrders = JSON.parse(localStorage.getItem("orders")) || [];
-    setOrders(savedOrders);
-  }, []);
+    const userOrders = savedOrders.filter(order => order.userId === currentUserId);
+    setOrders(userOrders);
+  }, [currentUserId]);
 
   // Cancel Order
   const cancelOrder = (id) => {
-    const updated = orders.map((order) =>
-      order.id === id ? { ...order, status: "Cancelled" } : order
+    const savedOrders = JSON.parse(localStorage.getItem("orders")) || [];
+    
+    // Update only the order for this user
+    const updatedOrders = savedOrders.map(order =>
+      order.id === id && order.userId === currentUserId
+        ? { ...order, status: "Cancelled" }
+        : order
     );
-    setOrders(updated);
-    localStorage.setItem("orders", JSON.stringify(updated));
+
+    localStorage.setItem("orders", JSON.stringify(updatedOrders));
+
+    // Update local state for display
+    setOrders(updatedOrders.filter(order => order.userId === currentUserId));
   };
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <div className="max-w-4xl mx-auto">
-
         <h1 className="text-3xl font-bold mb-6 flex items-center gap-3">
           <FaBoxOpen className="text-amber-600" /> Your Orders
         </h1>
