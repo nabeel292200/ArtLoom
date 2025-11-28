@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useWishlist } from "../context/WishlistContext";
 import { useCart } from "../context/CartContext";
 import { FaHeart, FaShoppingCart, FaTrash } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 export default function Wishlist() {
   const { wishlist, removeFromWishlist } = useWishlist();
@@ -14,13 +15,13 @@ export default function Wishlist() {
     addToCart(product);          
     removeFromWishlist(product.id);   // ✅ REMOVE FROM WISHLIST when added to cart
 
-    alert(`${product.title} added to cart!`);
+    toast.success(`${product.title} added to cart!`);
   };
 
   const handleRemoveFromWishlist = (productId, e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (window.confirm("Are you sure you want to remove this item from your wishlist?")) {
+    if (toast.error("item removed succesfully")) {
       removeFromWishlist(productId);
     }
   };
@@ -47,7 +48,7 @@ export default function Wishlist() {
               Start exploring our art collection and save your favorite pieces for later!
             </p>
             <Link
-              to="/"
+              to="/Gallery"
               className="bg-amber-500 text-white py-3 px-8 rounded-lg font-semibold hover:bg-amber-600 transition-colors inline-flex items-center gap-2"
             >
               Explore Artworks
@@ -130,7 +131,7 @@ export default function Wishlist() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
 
                 <Link
-                  to="/"
+                  to="/Gallery"
                   className="bg-gray-800 text-white py-3 px-8 rounded-lg font-semibold hover:bg-gray-900 transition-colors"
                 >
                   Continue Shopping

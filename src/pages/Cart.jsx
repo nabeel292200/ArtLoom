@@ -1,13 +1,12 @@
-// Cart.jsx
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { FaTrash, FaShoppingBag, FaArrowRight } from "react-icons/fa";
 
 export default function Cart() {
-  const { cart, removeFromCart, clearCart } = useCart();
+  const { cart, removeFromCart, clearCart, increaseQty, decreaseQty } = useCart();
   const navigate = useNavigate();
 
-  const totalPrice = cart.reduce((t, p) => t + p.price, 0);
+  const totalPrice = cart.reduce((t, p) => t + p.price * p.qty, 0);
 
   const handleBuyNow = () => {
     if (cart.length === 0) return;
@@ -31,7 +30,7 @@ export default function Cart() {
             <FaShoppingBag className="mx-auto text-gray-400 text-5xl mb-4" />
             <p className="text-gray-600 text-lg mb-4">Your cart is empty</p>
             <button
-              onClick={() => window.history.back()}
+              onClick={() => navigate("/Gallery")}
               className="bg-amber-500 text-white py-2 px-6 rounded-lg hover:bg-amber-600 transition-colors"
             >
               Continue Shopping
@@ -63,9 +62,31 @@ export default function Cart() {
                     <p className="text-gray-500 text-sm mb-3">
                       {product.category}
                     </p>
+
                     <p className="font-bold text-amber-600 text-xl">
                       ${product.price}
                     </p>
+
+                    {/* Quantity Counter */}
+                    <div className="flex items-center gap-4 mt-4">
+                      <button
+                        onClick={() => decreaseQty(product.id)}
+                        className="bg-gray-200 px-3 py-1 rounded-lg hover:bg-gray-300"
+                      >
+                        -
+                      </button>
+
+                      <span className="font-semibold text-lg">
+                        {product.qty}
+                      </span>
+
+                      <button
+                        onClick={() => increaseQty(product.id)}
+                        className="bg-gray-200 px-3 py-1 rounded-lg hover:bg-gray-300"
+                      >
+                        +
+                      </button>
+                    </div>
                   </div>
 
                   <button

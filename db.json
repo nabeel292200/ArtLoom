@@ -35,6 +35,18 @@
       "name": "nabeel",
       "email": "n@gmail.com",
       "password": "n"
+    },
+    {
+      "id": "a2a4",
+      "name": "w",
+      "email": "w@gmail.com",
+      "password": "w"
+    },
+    {
+      "id": "bd6a",
+      "name": "mishal",
+      "email": "m@gmail.com",
+      "password": "m"
     }
   ],
   "products": [
@@ -46,7 +58,8 @@
       "price": 1800,
       "place": "Florence, Italy",
       "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825672.jpg?t=st=1763980027~exp=1763983627~hmac=4d0335d7708bfbd6ef883c0df54fb3f5b70f852903550f9bfa5f2994a29bbfab&w=2000",
-      "description": "A warm and vibrant impressionist painting capturing the golden sunlight over a peaceful Italian garden."
+      "description": "A warm and vibrant impressionist painting capturing the golden sunlight over a peaceful Italian garden.",
+      "stock": -2
     },
     {
       "id": "2",
@@ -56,7 +69,8 @@
       "price": 2200,
       "place": "Osaka, Japan",
       "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
-      "description": "A minimal yet powerful expression of calm waves using cool tones and abstract strokes."
+      "description": "A minimal yet powerful expression of calm waves using cool tones and abstract strokes.",
+      "stock": -20
     },
     {
       "id": "3",
@@ -76,7 +90,8 @@
       "price": 2700,
       "place": "Madrid, Spain",
       "image": "https://img.freepik.com/free-photo/sea-landscape-with-digital-art-style_23-2151158404.jpg?t=st=1763983685~exp=1763987285~hmac=ddc76d2c0fdd73cf37c4364081a2c531a8004961bd27cddaf904a4845d42e51b&w=2000",
-      "description": "A bold abstract piece exploring emotional contrasts through red and dark geometric shapes."
+      "description": "A bold abstract piece exploring emotional contrasts through red and dark geometric shapes.",
+      "stock": -1
     },
     {
       "id": "5",
@@ -86,7 +101,8 @@
       "price": 1900,
       "place": "Paris, France",
       "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825715.jpg?t=st=1763983742~exp=1763987342~hmac=fea1ba63160ac864c58401350f175524e6a1ec0f7f59a28f4dfb15aa07ceb0a9&w=1480",
-      "description": "Soft contemporary gradients and layered brush textures create a soothing blue composition."
+      "description": "Soft contemporary gradients and layered brush textures create a soothing blue composition.",
+      "stock": -1
     },
     {
       "id": "6",
@@ -96,7 +112,8 @@
       "price": 1600,
       "place": "Stockholm, Sweden",
       "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825723.jpg?t=st=1763983814~exp=1763987414~hmac=6ba48baf62318c56858efe829f847374866e91096f6ddb38474a81bf205f8c18&w=1480",
-      "description": "A mystical depiction of Scandinavian forests blending realism with fantasy elements."
+      "description": "A mystical depiction of Scandinavian forests blending realism with fantasy elements.",
+      "stock": -5
     },
     {
       "id": "7",
@@ -136,7 +153,8 @@
       "price": 2500,
       "place": "Venice, Italy",
       "image": "https://img.freepik.com/premium-photo/acrylic-painting-boys-swimming_961875-422142.jpg?w=2000",
-      "description": "A dreamy night-sky fantasy painting filled with glowing stars and mystical silhouettes."
+      "description": "A dreamy night-sky fantasy painting filled with glowing stars and mystical silhouettes.",
+      "stock": null
     },
     {
       "id": "11",
@@ -146,7 +164,8 @@
       "price": 2300,
       "place": "Seoul, South Korea",
       "image": "https://img.freepik.com/premium-photo/joy-is-journey-wallpaper_1148167-79584.jpg?w=2000",
-      "description": "A colorful emotional artwork blending vibrant shapes and fantasies in expressive style."
+      "description": "A colorful emotional artwork blending vibrant shapes and fantasies in expressive style.",
+      "stock": null
     },
     {
       "id": "12",
@@ -161,46 +180,251 @@
   ],
   "orders": [
     {
-      "id": "ede1",
+      "id": "2033",
+      "userId": "8b23",
+      "email": "n@gmail.com",
       "title": "Silent Waves",
       "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
       "price": 2200,
-      "status": "Pending"
+      "qty": 1,
+      "status": "Pending",
+      "createdAt": "2025-11-28T03:26:52.726Z"
     },
     {
-      "id": "7805",
+      "id": "cdad",
+      "userId": "a2a4",
+      "productId": "2",
+      "name": "w",
+      "email": "w@gmail.com",
       "title": "Silent Waves",
       "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
       "price": 2200,
-      "status": "Pending"
+      "qty": 1,
+      "status": "Processing",
+      "createdAt": "2025-11-28T09:35:34.585Z"
     },
     {
-      "id": "323c",
+      "id": "40ae",
+      "userId": "a2a4",
+      "productId": "2",
+      "name": "w",
+      "email": "w@gmail.com",
       "title": "Silent Waves",
       "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
       "price": 2200,
-      "status": "Pending"
+      "qty": 1,
+      "status": "Processing",
+      "createdAt": "2025-11-28T09:44:44.679Z"
     },
     {
-      "id": "e01d",
+      "id": "cb12",
+      "userId": "a2a4",
+      "name": "w",
+      "email": "w@gmail.com",
+      "title": "Forest Spirits",
+      "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825723.jpg?t=st=1763983814~exp=1763987414~hmac=6ba48baf62318c56858efe829f847374866e91096f6ddb38474a81bf205f8c18&w=1480",
+      "price": 1600,
+      "qty": 5,
+      "status": "Pending",
+      "createdAt": "2025-11-28T10:00:24.523Z"
+    },
+    {
+      "id": "944b",
+      "userId": "a2a4",
+      "name": "w",
+      "email": "w@gmail.com",
       "title": "Silent Waves",
       "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
       "price": 2200,
-      "status": "Pending"
+      "qty": 1,
+      "status": "Pending",
+      "createdAt": "2025-11-28T10:06:45.311Z"
     },
     {
-      "id": "684b",
+      "id": "a01f",
+      "userId": "a2a4",
+      "email": "w@gmail.com",
       "title": "Silent Waves",
       "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
       "price": 2200,
-      "status": "Pending"
+      "qty": 1,
+      "status": "Pending",
+      "createdAt": "2025-11-28T10:13:48.562Z"
     },
     {
-      "id": "a63d",
-      "title": "Autumn Streets",
-      "image": "https://img.freepik.com/free-photo/enchanting-watercolor-fairy-illustration_23-2151557302.jpg?t=st=1763983610~exp=1763987210~hmac=f784bc0d8fb25726ba6cd214cd7f6e480ddd715350a2ac4540472e24bacbec32&w=740",
-      "price": 1500,
-      "status": "Pending"
+      "id": "e8b4",
+      "userId": "68d9",
+      "email": "h@gmail.com",
+      "title": "Silent Waves",
+      "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
+      "price": 2200,
+      "qty": 1,
+      "status": "Pending",
+      "createdAt": "2025-11-28T10:15:23.451Z"
+    },
+    {
+      "id": "94af",
+      "userId": "2683",
+      "email": "i@gmail.com",
+      "title": "Silent Waves",
+      "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
+      "price": 2200,
+      "qty": 1,
+      "status": "Pending",
+      "createdAt": "2025-11-28T10:17:28.847Z"
+    },
+    {
+      "id": "81f1",
+      "userId": "a2a4",
+      "email": "w@gmail.com",
+      "title": "Silent Waves",
+      "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
+      "price": 2200,
+      "qty": 1,
+      "status": "Pending",
+      "createdAt": "2025-11-28T10:19:10.663Z"
+    },
+    {
+      "id": "1ba0",
+      "userId": "a2a4",
+      "email": "w@gmail.com",
+      "title": "Blue Echo",
+      "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825715.jpg?t=st=1763983742~exp=1763987342~hmac=fea1ba63160ac864c58401350f175524e6a1ec0f7f59a28f4dfb15aa07ceb0a9&w=1480",
+      "price": 1900,
+      "qty": 1,
+      "status": "Pending",
+      "createdAt": "2025-11-28T10:19:29.047Z"
+    },
+    {
+      "id": "40fb",
+      "userId": "a2a4",
+      "email": "w@gmail.com",
+      "title": "Silent Waves",
+      "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
+      "price": 2200,
+      "qty": 1,
+      "status": "Pending",
+      "createdAt": "2025-11-28T10:25:12.676Z"
+    },
+    {
+      "id": "fb5d",
+      "userId": "a2a4",
+      "email": "w@gmail.com",
+      "items": [
+        {
+          "id": "2",
+          "title": "Silent Waves",
+          "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
+          "price": 2200,
+          "qty": 1
+        }
+      ],
+      "status": "Pending",
+      "createdAt": "2025-11-28T10:30:38.489Z"
+    },
+    {
+      "id": "d3d8",
+      "userId": "a2a4",
+      "email": "w@gmail.com",
+      "items": [
+        {
+          "id": "2",
+          "title": "Silent Waves",
+          "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
+          "price": 2200,
+          "qty": 1
+        }
+      ],
+      "status": "Pending",
+      "createdAt": "2025-11-28T10:33:19.275Z"
+    },
+    {
+      "id": "a0ec",
+      "userId": "bd6a",
+      "user": "mishal",
+      "email": "m@gmail.com",
+      "items": [
+        {
+          "id": "4",
+          "title": "The Red Horizon",
+          "image": "https://img.freepik.com/free-photo/sea-landscape-with-digital-art-style_23-2151158404.jpg?t=st=1763983685~exp=1763987285~hmac=ddc76d2c0fdd73cf37c4364081a2c531a8004961bd27cddaf904a4845d42e51b&w=2000",
+          "price": 2700,
+          "qty": 1
+        }
+      ],
+      "status": "Pending",
+      "createdAt": "2025-11-28T10:36:12.029Z"
+    },
+    {
+      "id": "5961",
+      "userId": "bd6a",
+      "user": "mishal",
+      "email": "m@gmail.com",
+      "items": [
+        {
+          "id": "6",
+          "title": "Forest Spirits",
+          "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825723.jpg?t=st=1763983814~exp=1763987414~hmac=6ba48baf62318c56858efe829f847374866e91096f6ddb38474a81bf205f8c18&w=1480",
+          "price": 1600,
+          "qty": 1
+        }
+      ],
+      "status": "Cancelled",
+      "createdAt": "2025-11-28T10:36:55.922Z"
+    },
+    {
+      "id": "f66f",
+      "userId": "bd6a",
+      "user": "mishal",
+      "email": "m@gmail.com",
+      "items": [
+        {
+          "id": "2",
+          "title": "Silent Waves",
+          "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
+          "price": 2200,
+          "qty": 1
+        }
+      ],
+      "status": "Pending",
+      "paymentMethod": "card",
+      "createdAt": "2025-11-28T10:47:28.581Z"
+    },
+    {
+      "id": "5610",
+      "userId": "bd6a",
+      "user": "mishal",
+      "email": "m@gmail.com",
+      "items": [
+        {
+          "id": "2",
+          "title": "Silent Waves",
+          "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
+          "price": 2200,
+          "qty": 1
+        }
+      ],
+      "status": "Pending",
+      "paymentMethod": "cod",
+      "createdAt": "2025-11-28T10:52:41.890Z"
+    },
+    {
+      "id": "dc4e",
+      "userId": "bd6a",
+      "user": "mishal",
+      "email": "m@gmail.com",
+      "items": [
+        {
+          "id": "1",
+          "title": "Sunlit Garden",
+          "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825672.jpg?t=st=1763980027~exp=1763983627~hmac=4d0335d7708bfbd6ef883c0df54fb3f5b70f852903550f9bfa5f2994a29bbfab&w=2000",
+          "price": 1800,
+          "qty": 2
+        }
+      ],
+      "status": "Cancelled",
+      "paymentMethod": "cod",
+      "createdAt": "2025-11-28T11:00:27.171Z"
     }
   ]
 }

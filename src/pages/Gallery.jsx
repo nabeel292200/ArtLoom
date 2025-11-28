@@ -9,22 +9,35 @@ export default function Products() {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
-  const [searchTerm, setSearchTerm] = useState(""); 
+  const [searchTerm, setSearchTerm] = useState("");
   const [priceSort, setPriceSort] = useState("none");
 
-  const { addToCart } = useCart();
-  const { addToWishlist } = useWishlist();
+  // Pagination
+  const [currentPage, setCurrentPage] = useState(() => {
+    return Number(localStorage.getItem("currentPage")) || 1;
+  });
 
+  const itemsPerPage = 6;
+
+  const { addToCart } = useCart();
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
+
+  // Save pagination to localStorage
+  useEffect(() => {
+    localStorage.setItem("currentPage", currentPage);
+  }, [currentPage]);
+
+  // Load products
   useEffect(() => {
     fetch("http://localhost:3001/products")
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setProducts(data);
         setFilteredProducts(data);
       });
   }, []);
 
-  // Filter & Sort
+  // Filter + Sort
   useEffect(() => {
     let updatedList = [...products];
 
@@ -34,29 +47,47 @@ export default function Products() {
       );
     }
 
-    if (priceSort === "low-high") updatedList.sort((a,b) => a.price - b.price);
-    else if (priceSort === "high-low") updatedList.sort((a,b) => b.price - a.price);
+    if (priceSort === "low-high") updatedList.sort((a, b) => a.price - b.price);
+    else if (priceSort === "high-low")
+      updatedList.sort((a, b) => b.price - a.price);
 
     setFilteredProducts(updatedList);
+    setCurrentPage(1);
   }, [searchTerm, priceSort, products]);
 
-  // Reset Filters
+  // Reset filters
   const resetFilters = () => {
     setSearchTerm("");
     setPriceSort("none");
     setFilteredProducts(products);
+    setCurrentPage(1);
   };
 
-  // Add to Cart with toast
+  // Pagination logic
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+  const indexOfLast = currentPage * itemsPerPage;
+  const indexOfFirst = indexOfLast - itemsPerPage;
+  const currentItems = filteredProducts.slice(indexOfFirst, indexOfLast);
+
+  const goToPage = (page) => {
+    setCurrentPage(page); // fixed, no scroll
+  };
+
+  // Add to cart
   const handleAddToCart = (product) => {
     addToCart(product);
     toast.success(`${product.title} added to cart!`);
   };
 
-  // Add to Wishlist with toast
-  const handleAddToWishlist = (product) => {
-    addToWishlist(product);
-    toast.info(`${product.title} added to wishlist!`);
+  // Wishlist toggle
+  const handleWishlistToggle = (product) => {
+    if (isInWishlist(product.id)) {
+      removeFromWishlist(product.id);
+      toast.info(`${product.title} removed from wishlist`);
+    } else {
+      addToWishlist(product);
+      toast.success(`${product.title} added to wishlist`);
+    }
   };
 
   return (
@@ -96,14 +127,59 @@ export default function Products() {
 
         {/* Product Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProducts.map((product) => (
+          {currentItems.map((product) => (
             <ProductCard
               key={product.id}
               product={product}
+              isWishlisted={isInWishlist(product.id)}
               onAddToCart={() => handleAddToCart(product)}
-              onAddToWishlist={() => handleAddToWishlist(product)}
+              onToggleWishlist={() => handleWishlistToggle(product)}
             />
           ))}
+        </div>
+
+        {/* Pagination */}
+        <div className="flex justify-center mt-10 gap-3">
+          {/* Prev */}
+          <button
+            className={`px-4 py-2 rounded-lg border ${
+              currentPage === 1
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-white hover:bg-gray-200"
+            }`}
+            disabled={currentPage === 1}
+            onClick={() => goToPage(currentPage - 1)}
+          >
+            ◀ Prev
+          </button>
+
+          {/* Numbers */}
+          {[...Array(totalPages).keys()].map((num) => (
+            <button
+              key={num}
+              onClick={() => goToPage(num + 1)}
+              className={`px-4 py-2 rounded-lg border ${
+                currentPage === num + 1
+                  ? "bg-orange-500 text-white font-bold"
+                  : "bg-white hover:bg-gray-200"
+              }`}
+            >
+              {num + 1}
+            </button>
+          ))}
+
+          {/* Next */}
+          <button
+            className={`px-4 py-2 rounded-lg border ${
+              currentPage === totalPages
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-white hover:bg-gray-200"
+            }`}
+            disabled={currentPage === totalPages}
+            onClick={() => goToPage(currentPage + 1)}
+          >
+            Next ▶
+          </button>
         </div>
       </div>
 
