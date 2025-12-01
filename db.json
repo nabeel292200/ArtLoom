@@ -59,7 +59,7 @@
       "place": "Florence, Italy",
       "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825672.jpg?t=st=1763980027~exp=1763983627~hmac=4d0335d7708bfbd6ef883c0df54fb3f5b70f852903550f9bfa5f2994a29bbfab&w=2000",
       "description": "A warm and vibrant impressionist painting capturing the golden sunlight over a peaceful Italian garden.",
-      "stock": -2
+      "stock": -3
     },
     {
       "id": "2",
@@ -80,7 +80,8 @@
       "price": 1500,
       "place": "Moscow, Russia",
       "image": "https://img.freepik.com/free-photo/enchanting-watercolor-fairy-illustration_23-2151557302.jpg?t=st=1763983610~exp=1763987210~hmac=f784bc0d8fb25726ba6cd214cd7f6e480ddd715350a2ac4540472e24bacbec32&w=740",
-      "description": "A realistic street-view painting portraying autumn colors and quiet evening lights."
+      "description": "A realistic street-view painting portraying autumn colors and quiet evening lights.",
+      "stock": 0
     },
     {
       "id": "4",
@@ -425,6 +426,56 @@
       "status": "Cancelled",
       "paymentMethod": "cod",
       "createdAt": "2025-11-28T11:00:27.171Z"
+    },
+    {
+      "id": "6b18",
+      "userId": "bd6a",
+      "user": "mishal",
+      "email": "m@gmail.com",
+      "items": [
+        {
+          "id": "1",
+          "title": "Sunlit Garden",
+          "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825672.jpg?t=st=1763980027~exp=1763983627~hmac=4d0335d7708bfbd6ef883c0df54fb3f5b70f852903550f9bfa5f2994a29bbfab&w=2000",
+          "price": 1800,
+          "qty": 1
+        }
+      ],
+      "status": "Pending",
+      "paymentMethod": "cod",
+      "createdAt": "2025-11-29T03:23:54.306Z"
+    },
+    {
+      "id": "2634",
+      "userId": "bd6a",
+      "user": "mishal",
+      "email": "m@gmail.com",
+      "items": [
+        {
+          "id": "1",
+          "title": "Sunlit Garden",
+          "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825672.jpg?t=st=1763980027~exp=1763983627~hmac=4d0335d7708bfbd6ef883c0df54fb3f5b70f852903550f9bfa5f2994a29bbfab&w=2000",
+          "price": 1800,
+          "qty": 1
+        },
+        {
+          "id": "5",
+          "title": "Blue Echo",
+          "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825715.jpg?t=st=1763983742~exp=1763987342~hmac=fea1ba63160ac864c58401350f175524e6a1ec0f7f59a28f4dfb15aa07ceb0a9&w=1480",
+          "price": 1900,
+          "qty": 1
+        },
+        {
+          "id": "3",
+          "title": "Autumn Streets",
+          "image": "https://img.freepik.com/free-photo/enchanting-watercolor-fairy-illustration_23-2151557302.jpg?t=st=1763983610~exp=1763987210~hmac=f784bc0d8fb25726ba6cd214cd7f6e480ddd715350a2ac4540472e24bacbec32&w=740",
+          "price": 1500,
+          "qty": 2
+        }
+      ],
+      "status": "Cancelled",
+      "paymentMethod": "cod",
+      "createdAt": "2025-11-30T08:58:40.035Z"
     }
   ]
 }

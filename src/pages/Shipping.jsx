@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
+import { toast } from "react-toastify";
 
 const Shipping = () => {
   const [orders, setOrders] = useState([]);
@@ -92,7 +93,7 @@ const Shipping = () => {
         )
       );
 
-      alert("Order cancelled & stock restored.");
+      toast.success("Order cancelled & stock restored.");
     } catch (err) {
       console.error(err);
       alert("Failed to cancel order.");

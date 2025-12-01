@@ -11,7 +11,7 @@ export default function Home() {
 
   return (
     <>
-      {/* Fullscreen Hero Section */}
+    
       <div
         style={{
           backgroundImage: `url(${bgImg})`,
@@ -40,7 +40,6 @@ export default function Home() {
         </button>
       </div>
 
-      {/* Footer Always Bottom */}
       <Footer />
     </>
   );

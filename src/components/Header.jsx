@@ -8,8 +8,8 @@ export default function Header() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { wishlist } = useWishlist(); // ✅ live wishlist
-  const { cart } = useCart(); // ✅ live cart
+  const { wishlist } = useWishlist(); 
+  const { cart } = useCart(); 
 
   const [activePath, setActivePath] = useState(location.pathname);
   const [loggedIn, setLoggedIn] = useState(false);
@@ -18,7 +18,7 @@ export default function Header() {
   useEffect(() => {
     setActivePath(location.pathname);
 
-    // Check login state from localStorage
+
     const user = JSON.parse(localStorage.getItem("user"));
     setLoggedIn(!!user);
     setLoggedInUser(user);
