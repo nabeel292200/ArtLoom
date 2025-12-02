@@ -27,7 +27,7 @@ export default function Login() {
         return;
       }
 
-      // Save user info in localStorage
+      // userne  localStoragel save cheyan
       localStorage.setItem("user", JSON.stringify(user));
 
       toast.success("Login Successful!", { autoClose: 1500 });

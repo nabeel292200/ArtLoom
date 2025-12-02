@@ -1,10 +1,14 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
+
+// Components
 import Header from "./components/Header";
+
+// Pages
 import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import Products from "./components/ProductCard"; // ✅ Corrected import
+import Products from "./pages/Gallery";    
 import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
 import Shipping from "./pages/Shipping";
@@ -13,15 +17,22 @@ import Register from "./pages/Register";
 import ProductDetail from "./pages/productdetails";
 import Payment from "./pages/Payment";
 
+// Toast
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function App() {
+  const location = useLocation();
+
+  // Remove header on login & register pages
+  const hideHeaderRoutes = ["/login", "/Register"];
+  const shouldHideHeader = hideHeaderRoutes.includes(location.pathname);
+
   return (
     <div>
-      <Header />
+      {/* Header only on allowed pages */}
+      {!shouldHideHeader && <Header />}
 
-      {/* Toast notifications */}
       <ToastContainer position="top-right" autoClose={2000} />
 
       <Routes>
@@ -29,11 +40,11 @@ export default function App() {
         <Route path="/Gallery" element={<Gallery />} />
         <Route path="/About" element={<About />} />
         <Route path="/Contact" element={<Contact />} />
-        <Route path="/products" element={<Products />} /> {/* Products page */}
+        <Route path="/products" element={<Products />} />   
         <Route path="/ProductDetail/:id" element={<ProductDetail />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/Shipping" element={<Shipping />} />
+        <Route path="/shipping" element={<Shipping />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/payment" element={<Payment />} />

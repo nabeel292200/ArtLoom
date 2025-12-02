@@ -80,7 +80,7 @@ const Shipping = () => {
         });
       }
 
-      // Update order status
+      //  order status checkcheyan
       await fetch(`http://localhost:3001/orders/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
@@ -148,7 +148,7 @@ const Shipping = () => {
                 key={order.id}
                 className="bg-white border shadow-lg rounded-2xl p-6"
               >
-                {/* HEADER */}
+               
                 <div className="flex justify-between border-b pb-4 mb-4">
                   <div>
                     <h3 className="text-lg font-semibold">
@@ -173,7 +173,7 @@ const Shipping = () => {
                   </span>
                 </div>
 
-                {/* ITEMS */}
+                
                 <div className="space-y-4">
                   {order.items.map((item, index) => (
                     <div

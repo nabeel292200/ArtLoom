@@ -16,6 +16,17 @@ export default function Payment() {
 
   const [paymentMethod, setPaymentMethod] = useState("card");
   const [loading, setLoading] = useState(false);
+
+  // Address state
+  const [address, setAddress] = useState({
+    fullName: "",
+    phone: "",
+    street: "",
+    city: "",
+    state: "",
+    pincode: ""
+  });
+
   const [formData, setFormData] = useState({
     cardNumber: "",
     expiryDate: "",
@@ -24,6 +35,7 @@ export default function Payment() {
     cardName: ""
   });
 
+  
   const handlePayment = async () => {
     if (!currentUserId) {
       toast.error("You must be logged in to continue!");
@@ -35,7 +47,20 @@ export default function Payment() {
       return;
     }
 
-    // Simple validation
+    
+    if (
+      !address.fullName ||
+      !address.phone ||
+      !address.street ||
+      !address.city ||
+      !address.state ||
+      !address.pincode
+    ) {
+      toast.error("Please fill all address fields!");
+      return;
+    }
+
+    
     if (paymentMethod === "card") {
       if (!formData.cardNumber || !formData.expiryDate || !formData.cvv || !formData.cardName) {
         toast.error("Please fill all card details");
@@ -43,6 +68,7 @@ export default function Payment() {
       }
     }
 
+  
     if (paymentMethod === "upi") {
       if (!formData.upiId) {
         toast.error("Please enter UPI ID");
@@ -62,11 +88,12 @@ export default function Payment() {
         return;
       }
 
-      // Create order
+      
       const order = {
         userId: currentUserId,
         user: user.name,
         email: user.email,
+        address: address, 
         items: cartItems.map(item => ({
           id: item.id,
           title: item.title,
@@ -79,7 +106,7 @@ export default function Payment() {
         createdAt: new Date().toISOString()
       };
 
-      // Save the order
+      
       const saveOrder = await fetch("http://localhost:3001/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -88,7 +115,7 @@ export default function Payment() {
 
       if (!saveOrder.ok) throw new Error("Failed to save order");
 
-      // Reduce stock for each product
+      
       for (let item of cartItems) {
         const prodRes = await fetch(`http://localhost:3001/products/${item.id}`);
         const product = await prodRes.json();
@@ -124,163 +151,174 @@ export default function Payment() {
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4">
       <div className="max-w-2xl mx-auto">
+
         
-        {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-2xl font-bold text-gray-900">Payment</h1>
           <p className="text-gray-600">Choose how you want to pay</p>
         </div>
 
+        
         <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
-          {/* Payment Methods */}
+          <h3 className="text-lg font-semibold mb-4">Delivery Address</h3>
+
+          <div className="space-y-4">
+            <input type="text" placeholder="Full Name"
+              className="w-full p-2 border rounded"
+              value={address.fullName}
+              onChange={(e) => setAddress({ ...address, fullName: e.target.value })}
+            />
+
+            <input type="text" placeholder="Phone Number"
+              className="w-full p-2 border rounded"
+              value={address.phone}
+              onChange={(e) => setAddress({ ...address, phone: e.target.value })}
+            />
+
+            <input type="text" placeholder="Street Address"
+              className="w-full p-2 border rounded"
+              value={address.street}
+              onChange={(e) => setAddress({ ...address, street: e.target.value })}
+            />
+
+            <div className="grid grid-cols-2 gap-4">
+              <input type="text" placeholder="City"
+                className="p-2 border rounded"
+                value={address.city}
+                onChange={(e) => setAddress({ ...address, city: e.target.value })}
+              />
+              <input type="text" placeholder="State"
+                className="p-2 border rounded"
+                value={address.state}
+                onChange={(e) => setAddress({ ...address, state: e.target.value })}
+              />
+            </div>
+
+            <input type="text" placeholder="Pincode"
+              className="w-full p-2 border rounded"
+              value={address.pincode}
+              onChange={(e) => setAddress({ ...address, pincode: e.target.value })}
+            />
+          </div>
+        </div>
+
+        {/* Payment Section */}
+        <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
           <div className="mb-6">
             <h3 className="text-lg font-semibold mb-4">Payment Method</h3>
+
             <div className="grid grid-cols-3 gap-3 mb-6">
               <button
                 onClick={() => setPaymentMethod("card")}
-                className={`p-3 border rounded-lg flex flex-col items-center gap-2 ${
-                  paymentMethod === "card" ? "border-blue-500 bg-blue-50" : "border-gray-300"
+                className={`p-3 border rounded-lg flex flex-col items-center ${
+                  paymentMethod === "card" ? "border-blue-500 bg-blue-50" : ""
                 }`}
               >
-                <FaCreditCard className="text-blue-500" size={20} />
-                <span className="text-sm font-medium">Card</span>
+                <FaCreditCard size={20} />
+                Card
               </button>
 
               <button
                 onClick={() => setPaymentMethod("upi")}
-                className={`p-3 border rounded-lg flex flex-col items-center gap-2 ${
-                  paymentMethod === "upi" ? "border-blue-500 bg-blue-50" : "border-gray-300"
+                className={`p-3 border rounded-lg flex flex-col items-center ${
+                  paymentMethod === "upi" ? "border-blue-500 bg-blue-50" : ""
                 }`}
               >
-                <FaMobileAlt className="text-green-500" size={20} />
-                <span className="text-sm font-medium">UPI</span>
+                <FaMobileAlt size={20} />
+                UPI
               </button>
 
               <button
                 onClick={() => setPaymentMethod("cod")}
-                className={`p-3 border rounded-lg flex flex-col items-center gap-2 ${
-                  paymentMethod === "cod" ? "border-blue-500 bg-blue-50" : "border-gray-300"
+                className={`p-3 border rounded-lg flex flex-col items-center ${
+                  paymentMethod === "cod" ? "border-blue-500 bg-blue-50" : ""
                 }`}
               >
-                <FaMoneyBill className="text-orange-500" size={20} />
-                <span className="text-sm font-medium">COD</span>
+                <FaMoneyBill size={20} />
+                COD
               </button>
             </div>
 
-            {/* Payment Forms */}
+            {/* Card */}
             {paymentMethod === "card" && (
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Cardholder Name</label>
-                  <input
-                    type="text"
-                    value={formData.cardName}
-                    onChange={(e) => handleInputChange("cardName", e.target.value)}
-                    placeholder="John Doe"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Card Number</label>
-                  <input
-                    type="text"
-                    value={formData.cardNumber}
-                    onChange={(e) => handleInputChange("cardNumber", e.target.value)}
-                    placeholder="1234 5678 9012 3456"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  />
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Expiry Date</label>
-                    <input
-                      type="text"
-                      value={formData.expiryDate}
-                      onChange={(e) => handleInputChange("expiryDate", e.target.value)}
-                      placeholder="MM/YY"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">CVV</label>
-                    <input
-                      type="text"
-                      value={formData.cvv}
-                      onChange={(e) => handleInputChange("cvv", e.target.value)}
-                      placeholder="123"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    />
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {paymentMethod === "upi" && (
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">UPI ID</label>
-                <input
-                  type="text"
-                  value={formData.upiId}
-                  onChange={(e) => handleInputChange("upiId", e.target.value)}
-                  placeholder="yourname@upi"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              <div className="space-y-3">
+                <input type="text" placeholder="Cardholder Name"
+                  className="w-full p-2 border rounded"
+                  value={formData.cardName}
+                  onChange={(e) => handleInputChange("cardName", e.target.value)}
                 />
-                <p className="text-sm text-gray-500 mt-1">Enter your UPI ID (e.g., name@okicici, name@paytm)</p>
+
+                <input type="text" placeholder="Card Number"
+                  className="w-full p-2 border rounded"
+                  value={formData.cardNumber}
+                  onChange={(e) => handleInputChange("cardNumber", e.target.value)}
+                />
+
+                <div className="grid grid-cols-2 gap-3">
+                  <input type="text" placeholder="MM/YY"
+                    className="p-2 border rounded"
+                    value={formData.expiryDate}
+                    onChange={(e) => handleInputChange("expiryDate", e.target.value)}
+                  />
+
+                  <input type="text" placeholder="CVV"
+                    className="p-2 border rounded"
+                    value={formData.cvv}
+                    onChange={(e) => handleInputChange("cvv", e.target.value)}
+                  />
+                </div>
               </div>
             )}
 
+            {/* UPI */}
+            {paymentMethod === "upi" && (
+              <input type="text" placeholder="yourname@upi"
+                className="w-full p-2 border rounded"
+                value={formData.upiId}
+                onChange={(e) => handleInputChange("upiId", e.target.value)}
+              />
+            )}
+
+            {/* COD */}
             {paymentMethod === "cod" && (
-              <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                <p className="text-yellow-800 text-sm">
-                  💰 Pay cash when your order is delivered. Exact change is appreciated.
-                </p>
+              <div className="bg-yellow-50 border p-3 rounded">
+                Pay when order arrives.
               </div>
             )}
           </div>
 
-          {/* Payment Button */}
+          {/* Pay Button */}
           <button
             onClick={handlePayment}
             disabled={loading}
-            className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed font-semibold flex items-center justify-center gap-2"
+            className="w-full bg-blue-500 text-white py-3 rounded-lg"
           >
-            <FaLock size={16} />
+            <FaLock className="inline mr-2" />
             {loading ? "Processing..." : `Pay $${total.toFixed(2)}`}
           </button>
-
-          <p className="text-center text-sm text-gray-500 mt-3 flex items-center justify-center gap-1">
-            <FaLock size={12} />
-            Your payment is secure and encrypted
-          </p>
         </div>
 
         {/* Order Summary */}
         <div className="bg-white rounded-lg shadow-sm border p-6">
           <h3 className="text-lg font-semibold mb-4">Order Summary</h3>
-          
+
           <div className="space-y-3 mb-4">
             {cartItems.map(item => (
-              <div key={item.id} className="flex justify-between items-center">
-                <div className="flex items-center gap-3">
-                  <img src={item.image} alt={item.title} className="w-10 h-10 rounded object-cover" />
-                  <span className="font-medium">{item.title}</span>
+              <div key={item.id} className="flex justify-between">
+                <div className="flex gap-3">
+                  <img src={item.image} className="w-10 h-10 rounded" />
+                  <span>{item.title}</span>
                 </div>
-                <span className="text-gray-600">${item.price} x {item.qty || 1}</span>
+                <span>${item.price} x {item.qty}</span>
               </div>
             ))}
           </div>
 
-          <div className="border-t pt-4">
-            <div className="flex justify-between items-center text-lg font-bold">
-              <span>Total</span>
-              <span className="text-blue-600">${total.toFixed(2)}</span>
-            </div>
+          <div className="border-t pt-4 flex justify-between font-bold">
+            <span>Total</span>
+            <span className="text-blue-600">${total.toFixed(2)}</span>
           </div>
         </div>
-
       </div>
     </div>
   );

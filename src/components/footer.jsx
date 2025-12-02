@@ -12,7 +12,7 @@ export default function Footer() {
         borderTop: "1px solid rgba(255,255,255,0.1)",
       }}
     >
-      {/* TOP SECTION */}
+      
       <div
         style={{
           display: "flex",
@@ -21,7 +21,7 @@ export default function Footer() {
           gap: "40px",
         }}
       >
-        {/* Brand */}
+        
         <div style={{ maxWidth: "280px" }}>
           <h2
             style={{
@@ -39,7 +39,7 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* Quick Links */}
+        
         <div>
           <h3
             style={{
@@ -58,7 +58,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Support */}
+        
         <div>
           <h3
             style={{
@@ -77,7 +77,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Social Media */}
+        
         <div>
           <h3
             style={{
@@ -97,7 +97,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom Section */}
+      
       <div
         style={{
           textAlign: "center",

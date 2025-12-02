@@ -7,46 +7,16 @@
       "password": "123456"
     },
     {
-      "id": "b79a",
-      "name": "nabeel",
-      "email": "nabeel1@gmail.com",
-      "password": "1234"
-    },
-    {
-      "id": "0c03",
-      "name": "ashfakk",
-      "email": "ashf@gmail.com",
-      "password": "1234"
-    },
-    {
-      "id": "68d9",
-      "name": "haifa",
-      "email": "h@gmail.com",
-      "password": "h1"
-    },
-    {
-      "id": "2683",
-      "name": "irfan",
-      "email": "i@gmail.com",
-      "password": "i"
-    },
-    {
-      "id": "8b23",
-      "name": "nabeel",
-      "email": "n@gmail.com",
-      "password": "n"
-    },
-    {
-      "id": "a2a4",
-      "name": "w",
-      "email": "w@gmail.com",
-      "password": "w"
-    },
-    {
       "id": "bd6a",
       "name": "mishal",
       "email": "m@gmail.com",
       "password": "m"
+    },
+    {
+      "id": "241c",
+      "name": "MuhammedNabeel",
+      "email": "nabeel@gmail.com",
+      "password": "N46eel@p"
     }
   ],
   "products": [
@@ -59,7 +29,7 @@
       "place": "Florence, Italy",
       "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825672.jpg?t=st=1763980027~exp=1763983627~hmac=4d0335d7708bfbd6ef883c0df54fb3f5b70f852903550f9bfa5f2994a29bbfab&w=2000",
       "description": "A warm and vibrant impressionist painting capturing the golden sunlight over a peaceful Italian garden.",
-      "stock": -3
+      "stock": -4
     },
     {
       "id": "2",
@@ -70,7 +40,7 @@
       "place": "Osaka, Japan",
       "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
       "description": "A minimal yet powerful expression of calm waves using cool tones and abstract strokes.",
-      "stock": -20
+      "stock": -21
     },
     {
       "id": "3",
@@ -114,7 +84,7 @@
       "place": "Stockholm, Sweden",
       "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825723.jpg?t=st=1763983814~exp=1763987414~hmac=6ba48baf62318c56858efe829f847374866e91096f6ddb38474a81bf205f8c18&w=1480",
       "description": "A mystical depiction of Scandinavian forests blending realism with fantasy elements.",
-      "stock": -5
+      "stock": -6
     },
     {
       "id": "7",
@@ -476,6 +446,56 @@
       "status": "Cancelled",
       "paymentMethod": "cod",
       "createdAt": "2025-11-30T08:58:40.035Z"
+    },
+    {
+      "id": "8d57",
+      "userId": "bd6a",
+      "user": "mishal",
+      "email": "m@gmail.com",
+      "items": [
+        {
+          "id": "6",
+          "title": "Forest Spirits",
+          "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825723.jpg?t=st=1763983814~exp=1763987414~hmac=6ba48baf62318c56858efe829f847374866e91096f6ddb38474a81bf205f8c18&w=1480",
+          "price": 1600,
+          "qty": 1
+        },
+        {
+          "id": "1",
+          "title": "Sunlit Garden",
+          "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825672.jpg?t=st=1763980027~exp=1763983627~hmac=4d0335d7708bfbd6ef883c0df54fb3f5b70f852903550f9bfa5f2994a29bbfab&w=2000",
+          "price": 1800,
+          "qty": 1
+        }
+      ],
+      "status": "Pending",
+      "paymentMethod": "cod",
+      "createdAt": "2025-12-01T05:17:11.995Z"
+    },
+    {
+      "id": "2089",
+      "userId": "8b23",
+      "user": "nabeel",
+      "email": "n@gmail.com",
+      "items": [
+        {
+          "id": "2",
+          "title": "Silent Waves",
+          "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
+          "price": 2200,
+          "qty": 1
+        },
+        {
+          "id": "1",
+          "title": "Sunlit Garden",
+          "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825672.jpg?t=st=1763980027~exp=1763983627~hmac=4d0335d7708bfbd6ef883c0df54fb3f5b70f852903550f9bfa5f2994a29bbfab&w=2000",
+          "price": 1800,
+          "qty": 1
+        }
+      ],
+      "status": "Cancelled",
+      "paymentMethod": "cod",
+      "createdAt": "2025-12-02T04:41:12.863Z"
     }
   ]
 }

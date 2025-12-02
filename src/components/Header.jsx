@@ -1,8 +1,8 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FaHeart, FaShoppingCart, FaTruck, FaUser } from "react-icons/fa";
 import { useState, useEffect } from "react";
-import { useWishlist } from "../context/WishlistContext"; // ✅ wishlist context
-import { useCart } from "../context/CartContext"; // ✅ cart context
+import { useWishlist } from "../context/WishlistContext"; 
+import { useCart } from "../context/CartContext"; 
 
 export default function Header() {
   const navigate = useNavigate();
@@ -153,9 +153,9 @@ export default function Header() {
         ))}
       </nav>
 
-      {/* Right Section */}
+      
       <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-        {/* Icons */}
+        
         {iconButtons.map(({ icon, path, title }) => (
           <div
             key={title}
@@ -173,7 +173,7 @@ export default function Header() {
           </div>
         ))}
 
-        {/* Greeting + Logout */}
+      
         {loggedIn ? (
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
             <span

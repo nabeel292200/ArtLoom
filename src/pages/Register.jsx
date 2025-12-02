@@ -28,7 +28,7 @@ export default function Register() {
 
       if (res.ok) {
         alert("Registration Successful! 🎉");
-        navigate("/login"); // redirect to login page
+        navigate("/login"); 
       } else {
         alert("Failed to Register. Try Again!");
       }

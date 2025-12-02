@@ -13,7 +13,7 @@ export default function Wishlist() {
     e.stopPropagation();
 
     addToCart(product);          
-    removeFromWishlist(product.id);   // ✅ REMOVE FROM WISHLIST when added to cart
+    removeFromWishlist(product.id);  
 
     toast.success(`${product.title} added to cart!`);
   };
@@ -30,7 +30,7 @@ export default function Wishlist() {
     <div className="min-h-screen bg-gray-100 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Header */}
+        
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-3">Your Wishlist</h1>
           <p className="text-gray-600 text-lg">
@@ -64,7 +64,7 @@ export default function Wishlist() {
               >
                 <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer group">
 
-                  {/* Image Container */}
+                  
                   <div className="relative overflow-hidden">
                     <img
                       src={product.image}
@@ -72,7 +72,7 @@ export default function Wishlist() {
                       className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
                     />
 
-                    {/* Remove Button */}
+                   
                     <button
                       onClick={(e) => handleRemoveFromWishlist(product.id, e)}
                       className="absolute top-3 right-3 p-2 bg-white/90 rounded-full shadow-md hover:scale-110 transition-all duration-200 group/remove"
@@ -80,13 +80,13 @@ export default function Wishlist() {
                       <FaTrash className="text-red-500 group-hover/remove:text-red-600" size={16} />
                     </button>
 
-                    {/* Category Badge */}
+                    
                     <span className="absolute top-3 left-3 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full">
                       {product.category}
                     </span>
                   </div>
 
-                  {/* Product Info */}
+                
                   <div className="p-5">
                     <h3 className="font-semibold text-gray-800 mb-2 line-clamp-2 group-hover:text-amber-600 transition-colors h-14">
                       {product.title}
@@ -105,7 +105,7 @@ export default function Wishlist() {
                       </span>
                     </div>
 
-                    {/* Add to Cart Button */}
+                    
                     <button
                       onClick={(e) => handleAddToCart(product, e)}
                       className="w-full bg-amber-500 text-white py-3 rounded-lg font-medium hover:bg-amber-600 transition-colors flex items-center justify-center gap-2 group/cart"
@@ -121,7 +121,7 @@ export default function Wishlist() {
           </div>
         )}
 
-        {/* Clear All */}
+       
         {wishlist.length > 0 && (
           <div className="mt-12 text-center">
             <div className="bg-white rounded-xl shadow-sm p-6 max-w-2xl mx-auto">

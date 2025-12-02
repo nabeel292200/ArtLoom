@@ -4,7 +4,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [refreshKey, setRefreshKey] = useState(0); // 🔥 NEW
+  const [refreshKey, setRefreshKey] = useState(0); 
 
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem("user"));
@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("user", JSON.stringify(userData));
     setUser(userData);
 
-    // 🔥 force reload wishlist/cart instantly
+    
     setRefreshKey((prev) => prev + 1);
   };
 
@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("user");
     setUser(null);
 
-    // 🔥 Clear UI immediately
+    
     setRefreshKey((prev) => prev + 1);
   };
 

@@ -12,7 +12,7 @@ export default function Products() {
   const [searchTerm, setSearchTerm] = useState("");
   const [priceSort, setPriceSort] = useState("none");
 
-  // Pagination
+  // Paginationte logic
   const [currentPage, setCurrentPage] = useState(() => {
     return Number(localStorage.getItem("currentPage")) || 1;
   });
@@ -22,12 +22,12 @@ export default function Products() {
   const { addToCart } = useCart();
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
 
-  // Save pagination to localStorage
+  // paginationl  localStorage save cheyan
   useEffect(() => {
     localStorage.setItem("currentPage", currentPage);
   }, [currentPage]);
 
-  // Load products
+  //  products load cheyan
   useEffect(() => {
     fetch("http://localhost:3001/products")
       .then((res) => res.json())
@@ -37,7 +37,7 @@ export default function Products() {
       });
   }, []);
 
-  // Filter + Sort
+  // Filter and Sort amount case
   useEffect(() => {
     let updatedList = [...products];
 
@@ -55,7 +55,7 @@ export default function Products() {
     setCurrentPage(1);
   }, [searchTerm, priceSort, products]);
 
-  // Reset filters
+  // filter Reset cheyan
   const resetFilters = () => {
     setSearchTerm("");
     setPriceSort("none");
@@ -70,16 +70,16 @@ export default function Products() {
   const currentItems = filteredProducts.slice(indexOfFirst, indexOfLast);
 
   const goToPage = (page) => {
-    setCurrentPage(page); // fixed, no scroll
+    setCurrentPage(page); 
   };
 
-  // Add to cart
+  // Add to cart button
   const handleAddToCart = (product) => {
     addToCart(product);
     toast.success(`${product.title} added to cart!`);
   };
 
-  // Wishlist toggle
+  // Wishlist icon
   const handleWishlistToggle = (product) => {
     if (isInWishlist(product.id)) {
       removeFromWishlist(product.id);
@@ -125,7 +125,7 @@ export default function Products() {
           </button>
         </div>
 
-        {/* Product Grid */}
+        {/* Product box */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {currentItems.map((product) => (
             <ProductCard
@@ -140,7 +140,7 @@ export default function Products() {
 
         {/* Pagination */}
         <div className="flex justify-center mt-10 gap-3">
-          {/* Prev */}
+          {/* Prev button */}
           <button
             className={`px-4 py-2 rounded-lg border ${
               currentPage === 1
@@ -150,10 +150,10 @@ export default function Products() {
             disabled={currentPage === 1}
             onClick={() => goToPage(currentPage - 1)}
           >
-            ◀ Prev
+             Prev
           </button>
 
-          {/* Numbers */}
+         
           {[...Array(totalPages).keys()].map((num) => (
             <button
               key={num}
@@ -168,7 +168,7 @@ export default function Products() {
             </button>
           ))}
 
-          {/* Next */}
+          {/* Next button*/}
           <button
             className={`px-4 py-2 rounded-lg border ${
               currentPage === totalPages
@@ -178,7 +178,7 @@ export default function Products() {
             disabled={currentPage === totalPages}
             onClick={() => goToPage(currentPage + 1)}
           >
-            Next ▶
+            Next 
           </button>
         </div>
       </div>

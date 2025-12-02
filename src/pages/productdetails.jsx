@@ -106,7 +106,7 @@ export default function ProductDetail() {
           className="flex items-center text-gray-600 hover:text-gray-800 mb-6 transition-colors"
         >
           <FaArrowLeft className="mr-2" />
-          Back to Gallery
+         Go to Back 
         </button>
 
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">

@@ -12,7 +12,7 @@ export default function Contact() {
       >
         <div className="bg-white/90 backdrop-blur-md shadow-2xl rounded-3xl max-w-4xl w-full grid md:grid-cols-2 gap-10 p-10">
           
-          {/* Left Section */}
+         
           <div className="flex flex-col justify-center">
             <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-600 drop-shadow-md">
               Contact Us 🎨
@@ -28,7 +28,7 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Right Section - Contact Form */}
+        
           <form className="space-y-5">
             <input
               type="text"
@@ -62,7 +62,7 @@ export default function Contact() {
         </div>
       </div>
 
-      {/* Footer at Bottom */}
+      
       <Footer />
     </>
   );

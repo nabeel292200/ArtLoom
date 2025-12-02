@@ -39,7 +39,7 @@ export default function Cart() {
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
-            {/* Cart Items */}
+            {/* ith Cart Items */}
             <div className="lg:col-span-2 space-y-4">
               {cart.map((product) => (
                 <div
@@ -67,7 +67,7 @@ export default function Cart() {
                       ${product.price}
                     </p>
 
-                    {/* Quantity Counter */}
+                    {/* Quantity kuttan vendi */}
                     <div className="flex items-center gap-4 mt-4">
                       <button
                         onClick={() => decreaseQty(product.id)}
@@ -100,7 +100,7 @@ export default function Cart() {
               ))}
             </div>
 
-            {/* Order Summary */}
+            {/* Order amount,etc.. agnthe details*/}
             <div className="lg:col-span-1">
               <div className="bg-white p-6 shadow-lg rounded-xl sticky top-6">
                 <h3 className="text-xl font-bold mb-4">Order Summary</h3>

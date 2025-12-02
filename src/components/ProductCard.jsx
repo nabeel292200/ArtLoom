@@ -9,7 +9,7 @@ export default function ProductCard({ product }) {
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
   const { addToCart } = useCart();
 
-  // Initialize liked state from wishlist
+  //   wishlist  Initialize
   const [liked, setLiked] = useState(() => isInWishlist?.(product.id) || false);
 
   // Keep local liked state in sync with wishlist changes
@@ -18,7 +18,7 @@ export default function ProductCard({ product }) {
     if (current !== liked) setLiked(current);
   }, [product.id, isInWishlist]);
 
-  // Handle wishlist toggle with toast
+  // wishlist logic
   const handleWishlist = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -34,7 +34,7 @@ export default function ProductCard({ product }) {
     setLiked(!liked);
   };
 
-  // Handle add to cart with toast
+  //  add to cart ₹
   const handleAddToCart = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -52,7 +52,7 @@ export default function ProductCard({ product }) {
             className="w-full h-64 object-cover transition-transform duration-300 hover:scale-105"
           />
 
-          {/* Wishlist Button */}
+          
           <button
             onClick={handleWishlist}
             className="absolute top-3 right-3 p-2 bg-white/90 rounded-full shadow-md hover:scale-110 transition"
@@ -60,7 +60,7 @@ export default function ProductCard({ product }) {
             <FaHeart className={liked ? "text-red-600" : "text-gray-400"} size={18} />
           </button>
 
-          {/* New Badge */}
+          
           <span className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
             New
           </span>
@@ -89,10 +89,10 @@ export default function ProductCard({ product }) {
           <span className="text-xs text-gray-500">{product.place}</span>
         </div>
 
-        {/* Add to Cart Button */}
+      
         <button
           onClick={handleAddToCart}
-          className="w-full mt-3 bg-gradient-to-r from-yellow-600 to-blue-800 text-white py-2 rounded-lg font-medium shadow-md hover:shadow-xl transition-all"
+          className="w-full mt-3 bg-linear-to-r from-yellow-600 to-blue-800 text-white py-2 rounded-lg font-medium shadow-md hover:shadow-xl transition-all"
         >
           Add to Cart
         </button>
