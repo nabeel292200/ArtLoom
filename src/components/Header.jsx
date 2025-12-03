@@ -18,7 +18,6 @@ export default function Header() {
   useEffect(() => {
     setActivePath(location.pathname);
 
-
     const user = JSON.parse(localStorage.getItem("user"));
     setLoggedIn(!!user);
     setLoggedInUser(user);
@@ -92,6 +91,17 @@ export default function Header() {
       title: "Cart",
     },
     { icon: <FaTruck size={20} />, path: "/Shipping", title: "Shipping" },
+
+    // ⭐ ADDED — Profile Icon (Only if logged in)
+    ...(loggedIn
+      ? [
+          {
+            icon: <FaUser size={20} />,
+            path: "/Profile",
+            title: "Profile",
+          },
+        ]
+      : []),
   ];
 
   const isActive = (path) => activePath === path;
@@ -153,9 +163,8 @@ export default function Header() {
         ))}
       </nav>
 
-      
+      {/* Icons & Login */}
       <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-        
         {iconButtons.map(({ icon, path, title }) => (
           <div
             key={title}
@@ -173,7 +182,6 @@ export default function Header() {
           </div>
         ))}
 
-      
         {loggedIn ? (
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
             <span

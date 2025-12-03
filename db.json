@@ -13,8 +13,8 @@
       "password": "m"
     },
     {
-      "id": "241c",
-      "name": "MuhammedNabeel",
+      "id": "6161",
+      "name": "muhammednabeel",
       "email": "nabeel@gmail.com",
       "password": "N46eel@p"
     }
@@ -40,7 +40,7 @@
       "place": "Osaka, Japan",
       "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
       "description": "A minimal yet powerful expression of calm waves using cool tones and abstract strokes.",
-      "stock": -21
+      "stock": -25
     },
     {
       "id": "3",
@@ -496,6 +496,32 @@
       "status": "Cancelled",
       "paymentMethod": "cod",
       "createdAt": "2025-12-02T04:41:12.863Z"
+    },
+    {
+      "id": "fa57",
+      "userId": "6161",
+      "user": "muhammednabeel",
+      "email": "nabeel@gmail.com",
+      "address": {
+        "fullName": "muhammednabeel",
+        "phone": "9876542345",
+        "street": "malappuram",
+        "city": "chemmad",
+        "state": "kerala",
+        "pincode": "789056"
+      },
+      "items": [
+        {
+          "id": "2",
+          "title": "Silent Waves",
+          "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
+          "price": 2200,
+          "qty": 4
+        }
+      ],
+      "status": "Pending",
+      "paymentMethod": "cod",
+      "createdAt": "2025-12-02T12:22:11.504Z"
     }
   ]
 }

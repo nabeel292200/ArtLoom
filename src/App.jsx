@@ -16,10 +16,12 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ProductDetail from "./pages/productdetails";
 import Payment from "./pages/Payment";
+import profile from "./pages/profile";
 
 // Toast
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ProfilePage from "./pages/profile";
 
 export default function App() {
   const location = useLocation();
@@ -48,6 +50,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/payment" element={<Payment />} />
+          <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </div>
   );
