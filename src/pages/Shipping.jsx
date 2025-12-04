@@ -29,18 +29,23 @@ const Shipping = () => {
           const items = order.items?.length
             ? order.items
             : [
-                {
-                  id: order.id,
-                  title: order.title,
-                  image: order.image,
-                  price: order.price,
-                  qty: order.qty || 1,
-                },
-              ];
+              {
+                id: order.id,
+                title: order.title,
+                image: order.image,
+                price: order.price,
+                qty: order.qty || 1,
+              },
+            ];
           return { ...order, items };
         });
 
-        setOrders(ordersWithItems.reverse());
+        const finalOrders = ordersWithItems.reverse();
+        setOrders(finalOrders);
+
+        // save count for other pages
+        localStorage.setItem("orderCount", finalOrders.length);
+
       } catch (err) {
         console.error("Error fetching orders:", err);
       } finally {
@@ -50,6 +55,7 @@ const Shipping = () => {
 
     fetchOrders();
   }, [navigate]);
+
 
   const handleCancelOrder = async (id) => {
     if (!window.confirm("Are you sure you want to cancel this order?")) return;
@@ -62,11 +68,11 @@ const Shipping = () => {
       const items = orderData.items?.length
         ? orderData.items
         : [
-            {
-              id: orderData.id,
-              qty: orderData.qty || 1,
-            },
-          ];
+          {
+            id: orderData.id,
+            qty: orderData.qty || 1,
+          },
+        ];
 
       for (const item of items) {
         const productRes = await fetch(`http://localhost:3001/products/${item.id}`);
@@ -148,7 +154,7 @@ const Shipping = () => {
                 key={order.id}
                 className="bg-white border shadow-lg rounded-2xl p-6"
               >
-               
+
                 <div className="flex justify-between border-b pb-4 mb-4">
                   <div>
                     <h3 className="text-lg font-semibold">
@@ -173,7 +179,7 @@ const Shipping = () => {
                   </span>
                 </div>
 
-                
+
                 <div className="space-y-4">
                   {order.items.map((item, index) => (
                     <div

@@ -88,7 +88,7 @@ export default function ProfilePage() {
       alert("Password updated successfully!");
     }, 1000);
   };
-
+const orderCount = localStorage.getItem("orderCount") || 0;
   const togglePasswordVisibility = (field) => {
     setShowPassword(prev => ({ ...prev, [field]: !prev[field] }));
   };
@@ -229,9 +229,9 @@ export default function ProfilePage() {
                     </div>
                   </div>
                   
-                  <button className="w-full mt-6 px-4 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl font-semibold hover:from-blue-600 hover:to-blue-700 transition-all duration-200">
+                  {/* <button className="w-full mt-6 px-4 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl font-semibold hover:from-blue-600 hover:to-blue-700 transition-all duration-200">
                     Edit Full Profile
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>
@@ -351,7 +351,7 @@ export default function ProfilePage() {
               <div className="space-y-4">
                 <div className="flex justify-between items-center p-3 bg-white/10 rounded-xl backdrop-blur-sm">
                   <span>Orders</span>
-                  <span className="font-bold text-lg">12</span>
+                  <span className="font-bold text-lg">{orderCount}</span>
                 </div>
                 <div className="flex justify-between items-center p-3 bg-white/10 rounded-xl backdrop-blur-sm">
                   <span>Wishlist Items</span>
@@ -377,7 +377,7 @@ export default function ProfilePage() {
                     <span className="font-medium">My Orders</span>
                   </div>
                   <div className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium">
-                    12
+                    {orderCount}
                   </div>
                 </button>
 

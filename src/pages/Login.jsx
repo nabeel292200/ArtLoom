@@ -27,14 +27,22 @@ export default function Login() {
         return;
       }
 
+      if (user.status === "blocked") {
+        setError("Your account has been blocked by admin");
+        toast.error("Your account has been blocked by admin");
+        return;
+      }
+
       // userne  localStoragel save cheyan
       localStorage.setItem("user", JSON.stringify(user));
 
       toast.success("Login Successful!", { autoClose: 1500 });
 
-      setTimeout(() => {
-        navigate("/");
-      }, 1500);
+     setTimeout(() => {
+        if (user.role === "admin") navigate("/admin");
+        else navigate("/");
+        window.location.reload();
+      }, 1200);
 
     } catch (error) {
       toast.error("Something went wrong!");

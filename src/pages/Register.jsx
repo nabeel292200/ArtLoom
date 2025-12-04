@@ -6,6 +6,8 @@ export default function Register() {
     name: "",
     email: "",
     password: "",
+    role:"user",
+    status:"active"
   });
 
   const navigate = useNavigate();

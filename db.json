@@ -17,6 +17,26 @@
       "name": "muhammednabeel",
       "email": "nabeel@gmail.com",
       "password": "N46eel@p"
+    },
+    {
+      "id": "9e5d",
+      "name": "wghf",
+      "email": "w@gmail.com",
+      "password": "w"
+    },
+    {
+      "id": "aed3",
+      "name": "ashfak",
+      "email": "a@gmail.com",
+      "password": "a"
+    },
+    {
+      "id": "92c9",
+      "name": "irfan",
+      "email": "i@gmail.com",
+      "password": "i",
+      "role": "admin",
+      "status": "active"
     }
   ],
   "products": [
@@ -40,7 +60,7 @@
       "place": "Osaka, Japan",
       "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
       "description": "A minimal yet powerful expression of calm waves using cool tones and abstract strokes.",
-      "stock": -25
+      "stock": -26
     },
     {
       "id": "3",
@@ -150,89 +170,9 @@
     }
   ],
   "orders": [
-    {
-      "id": "2033",
-      "userId": "8b23",
-      "email": "n@gmail.com",
-      "title": "Silent Waves",
-      "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
-      "price": 2200,
-      "qty": 1,
-      "status": "Pending",
-      "createdAt": "2025-11-28T03:26:52.726Z"
-    },
-    {
-      "id": "cdad",
-      "userId": "a2a4",
-      "productId": "2",
-      "name": "w",
-      "email": "w@gmail.com",
-      "title": "Silent Waves",
-      "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
-      "price": 2200,
-      "qty": 1,
-      "status": "Processing",
-      "createdAt": "2025-11-28T09:35:34.585Z"
-    },
-    {
-      "id": "40ae",
-      "userId": "a2a4",
-      "productId": "2",
-      "name": "w",
-      "email": "w@gmail.com",
-      "title": "Silent Waves",
-      "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
-      "price": 2200,
-      "qty": 1,
-      "status": "Processing",
-      "createdAt": "2025-11-28T09:44:44.679Z"
-    },
-    {
-      "id": "cb12",
-      "userId": "a2a4",
-      "name": "w",
-      "email": "w@gmail.com",
-      "title": "Forest Spirits",
-      "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825723.jpg?t=st=1763983814~exp=1763987414~hmac=6ba48baf62318c56858efe829f847374866e91096f6ddb38474a81bf205f8c18&w=1480",
-      "price": 1600,
-      "qty": 5,
-      "status": "Pending",
-      "createdAt": "2025-11-28T10:00:24.523Z"
-    },
-    {
-      "id": "944b",
-      "userId": "a2a4",
-      "name": "w",
-      "email": "w@gmail.com",
-      "title": "Silent Waves",
-      "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
-      "price": 2200,
-      "qty": 1,
-      "status": "Pending",
-      "createdAt": "2025-11-28T10:06:45.311Z"
-    },
-    {
-      "id": "a01f",
-      "userId": "a2a4",
-      "email": "w@gmail.com",
-      "title": "Silent Waves",
-      "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
-      "price": 2200,
-      "qty": 1,
-      "status": "Pending",
-      "createdAt": "2025-11-28T10:13:48.562Z"
-    },
-    {
-      "id": "e8b4",
-      "userId": "68d9",
-      "email": "h@gmail.com",
-      "title": "Silent Waves",
-      "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
-      "price": 2200,
-      "qty": 1,
-      "status": "Pending",
-      "createdAt": "2025-11-28T10:15:23.451Z"
-    },
+    
+   
+  
     {
       "id": "94af",
       "userId": "2683",
@@ -522,6 +462,32 @@
       "status": "Pending",
       "paymentMethod": "cod",
       "createdAt": "2025-12-02T12:22:11.504Z"
+    },
+    {
+      "id": "c062",
+      "userId": "bd6a",
+      "user": "mishal",
+      "email": "m@gmail.com",
+      "address": {
+        "fullName": "sdfghjkl",
+        "phone": "dfghjkl;",
+        "street": "dfghjkl",
+        "city": "dfghjkl;",
+        "state": "dfghjkl;",
+        "pincode": "123456"
+      },
+      "items": [
+        {
+          "id": "2",
+          "title": "Silent Waves",
+          "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
+          "price": 2200,
+          "qty": 1
+        }
+      ],
+      "status": "Pending",
+      "paymentMethod": "cod",
+      "createdAt": "2025-12-03T06:04:42.860Z"
     }
   ]
 }
