@@ -19,15 +19,18 @@ import {
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext"; 
 
-
 export default function ProfilePage() {
-    
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [isEditingName, setIsEditingName] = useState(false);
+  const [isEditingPhone, setIsEditingPhone] = useState(false);
+  const [isEditingAddress, setIsEditingAddress] = useState(false);
   const [isEditingPassword, setIsEditingPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [editForm, setEditForm] = useState({
     name: "",
+    phone: "",
+    address: "",
     currentPassword: "",
     newPassword: "",
     confirmPassword: ""
@@ -37,17 +40,30 @@ export default function ProfilePage() {
     new: false,
     confirm: false
   });
-  const [loading, setLoading] = useState(false);
 
-  // Load saved user from localStorage
+  const { cart } = useCart();
+  const { wishlist } = useWishlist();
+
+  // Load saved user from localStorage (and ensure id exists)
   useEffect(() => {
     const savedUser = JSON.parse(localStorage.getItem("user"));
     if (!savedUser) {
       navigate("/login");
-    } else {
-      setUser(savedUser);
-      setEditForm(prev => ({ ...prev, name: savedUser.name }));
+      return;
     }
+    if (!savedUser.id) {
+      // If no id present, redirect to login to ensure proper login flow
+      console.warn("Local user does not have id. Redirecting to login.");
+      navigate("/login");
+      return;
+    }
+    setUser(savedUser);
+    setEditForm(prev => ({
+      ...prev,
+      name: savedUser.name || "",
+      phone: savedUser.phone || "",
+      address: savedUser.address || ""
+    }));
   }, [navigate]);
 
   const handleLogout = () => {
@@ -55,40 +71,107 @@ export default function ProfilePage() {
     navigate("/");
   };
 
-  const handleSaveName = () => {
-    if (!editForm.name.trim()) return;
-
-    setLoading(true);
-    // Simulate API call
-    setTimeout(() => {
-      const updatedUser = { ...user, name: editForm.name };
-      setUser(updatedUser);
-      localStorage.setItem("user", JSON.stringify(updatedUser));
-      setIsEditingName(false);
-      setLoading(false);
-    }, 800);
+  // Generic patch helper
+  const patchUser = async (patchBody) => {
+    if (!user?.id) throw new Error("User id missing");
+    const res = await fetch(`http://localhost:3001/users/${user.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(patchBody)
+    });
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(`Patch failed: ${res.status} ${text}`);
+    }
+    const updated = await res.json();
+    // Merge into local user object (json-server returns updated resource)
+    const merged = { ...user, ...patchBody, ...updated };
+    localStorage.setItem("user", JSON.stringify(merged));
+    setUser(merged);
+    return merged;
   };
-  const { cart } = useCart();
-   const { wishlist } = useWishlist(); 
-  
 
-  const handleSavePassword = () => {
+  // Save Name
+  const handleSaveName = async () => {
+    if (!editForm.name.trim()) return;
+    setLoading(true);
+    try {
+      await patchUser({ name: editForm.name });
+      setIsEditingName(false);
+    } catch (err) {
+      console.error(err);
+      alert("Failed to update name. See console for details.");
+    }
+    setLoading(false);
+  };
+
+  // Save Phone
+  const handleSavePhone = async () => {
+    const newPhone = editForm.phone?.trim() || "";
+    setLoading(true);
+    try {
+      await patchUser({ phone: newPhone });
+      setIsEditingPhone(false);
+    } catch (err) {
+      console.error(err);
+      alert("Failed to update phone.");
+    }
+    setLoading(false);
+  };
+
+  // Save Address
+  const handleSaveAddress = async () => {
+    const newAddress = editForm.address?.trim() || "";
+    setLoading(true);
+    try {
+      await patchUser({ address: newAddress });
+      setIsEditingAddress(false);
+    } catch (err) {
+      console.error(err);
+      alert("Failed to update address.");
+    }
+    setLoading(false);
+  };
+
+  // Save Password
+  const handleSavePassword = async () => {
     if (!editForm.newPassword || editForm.newPassword !== editForm.confirmPassword) {
       alert("Passwords don't match or are empty");
       return;
     }
-
     setLoading(true);
-    // Simulate API call for password change
-    setTimeout(() => {
-      // In real app, you would send currentPassword and newPassword to backend
+    try {
+      // 1. Fetch current user from DB to validate current password
+      const resp = await fetch(`http://localhost:3001/users/${user.id}`);
+      if (!resp.ok) throw new Error("Failed to fetch user from DB");
+      const userData = await resp.json();
+
+      // 2. Validate current password
+      if (userData.password !== editForm.currentPassword) {
+        alert("Current password is incorrect!");
+        setLoading(false);
+        return;
+      }
+
+      // 3. Patch new password
+      await patchUser({ password: editForm.newPassword });
+
+      // 4. Reset UI
       setIsEditingPassword(false);
-      setEditForm(prev => ({ ...prev, currentPassword: "", newPassword: "", confirmPassword: "" }));
-      setLoading(false);
+      setEditForm(prev => ({ 
+        ...prev, 
+        currentPassword: "", 
+        newPassword: "", 
+        confirmPassword: "" 
+      }));
       alert("Password updated successfully!");
-    }, 1000);
+    } catch (err) {
+      console.error(err);
+      alert("Error updating password. See console for details.");
+    }
+    setLoading(false);
   };
-const orderCount = localStorage.getItem("orderCount") || 0;
+
   const togglePasswordVisibility = (field) => {
     setShowPassword(prev => ({ ...prev, [field]: !prev[field] }));
   };
@@ -101,6 +184,8 @@ const orderCount = localStorage.getItem("orderCount") || 0;
       </div>
     </div>
   );
+
+  const orderCount = localStorage.getItem("orderCount") || 0;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-4 md:p-6">
@@ -128,7 +213,7 @@ const orderCount = localStorage.getItem("orderCount") || 0;
                 <div className="relative">
                   <div className="w-24 h-24 md:w-32 md:h-32 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
                     <span className="text-white text-4xl md:text-5xl font-bold">
-                      {user.name?.charAt(0).toUpperCase()}
+                      {user.name?.charAt(0).toUpperCase() || "U"}
                     </span>
                   </div>
                   <div className="absolute -bottom-2 -right-2 bg-white p-2 rounded-full shadow-lg">
@@ -197,6 +282,7 @@ const orderCount = localStorage.getItem("orderCount") || 0;
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-4">
+                  {/* Email (read-only) */}
                   <div className="flex items-center gap-3">
                     <div className="p-3 bg-blue-50 rounded-xl">
                       <Mail className="text-blue-600" size={20} />
@@ -207,31 +293,103 @@ const orderCount = localStorage.getItem("orderCount") || 0;
                     </div>
                   </div>
                   
+                  {/* Phone (editable) */}
                   <div className="flex items-center gap-3">
                     <div className="p-3 bg-green-50 rounded-xl">
                       <Phone className="text-green-600" size={20} />
                     </div>
-                    <div>
+                    <div className="flex-1">
                       <p className="text-sm text-gray-500">Phone</p>
-                      <p className="font-medium">{user.phone || "Not added"}</p>
+
+                      {isEditingPhone ? (
+                        <div className="flex gap-2 items-center mt-1">
+                          <input
+                            type="text"
+                            value={editForm.phone}
+                            onChange={(e) => setEditForm(prev => ({ ...prev, phone: e.target.value }))}
+                            className="flex-1 px-4 py-2 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                            autoFocus
+                          />
+                          <button
+                            onClick={handleSavePhone}
+                            disabled={loading}
+                            className="p-2 bg-green-500 text-white rounded-xl hover:bg-green-600 disabled:opacity-50"
+                          >
+                            <Check size={18} />
+                          </button>
+                          <button
+                            onClick={() => {
+                              setIsEditingPhone(false);
+                              setEditForm(prev => ({ ...prev, phone: user.phone || "" }));
+                            }}
+                            className="p-2 bg-gray-500 text-white rounded-xl hover:bg-gray-600"
+                          >
+                            <X size={18} />
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="mt-1 flex items-center gap-3">
+                          <p className="font-medium">{user.phone || "Not added"}</p>
+                          <button
+                            onClick={() => setIsEditingPhone(true)}
+                            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                          >
+                            <Edit2 size={16} className="text-gray-600" />
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
                 
                 <div className="space-y-4">
+                  {/* Address (editable) */}
                   <div className="flex items-center gap-3">
                     <div className="p-3 bg-purple-50 rounded-xl">
                       <MapPin className="text-purple-600" size={20} />
                     </div>
-                    <div>
+                    <div className="flex-1">
                       <p className="text-sm text-gray-500">Address</p>
-                      <p className="font-medium">{user.address || "Not added"}</p>
+
+                      {isEditingAddress ? (
+                        <div className="flex gap-2 items-center mt-1">
+                          <input
+                            type="text"
+                            value={editForm.address}
+                            onChange={(e) => setEditForm(prev => ({ ...prev, address: e.target.value }))}
+                            className="flex-1 px-4 py-2 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                            autoFocus
+                          />
+                          <button
+                            onClick={handleSaveAddress}
+                            disabled={loading}
+                            className="p-2 bg-green-500 text-white rounded-xl hover:bg-green-600 disabled:opacity-50"
+                          >
+                            <Check size={18} />
+                          </button>
+                          <button
+                            onClick={() => {
+                              setIsEditingAddress(false);
+                              setEditForm(prev => ({ ...prev, address: user.address || "" }));
+                            }}
+                            className="p-2 bg-gray-500 text-white rounded-xl hover:bg-gray-600"
+                          >
+                            <X size={18} />
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="mt-1 flex items-center gap-3">
+                          <p className="font-medium">{user.address || "Not added"}</p>
+                          <button
+                            onClick={() => setIsEditingAddress(true)}
+                            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                          >
+                            <Edit2 size={16} className="text-gray-600" />
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
-                  
-                  {/* <button className="w-full mt-6 px-4 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl font-semibold hover:from-blue-600 hover:to-blue-700 transition-all duration-200">
-                    Edit Full Profile
-                  </button> */}
                 </div>
               </div>
             </div>

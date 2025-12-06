@@ -28,19 +28,22 @@ export default function Login() {
       }
 
       if (user.status === "blocked") {
-        setError("Your account has been blocked by admin");
         toast.error("Your account has been blocked by admin");
         return;
       }
 
-      // userne  localStoragel save cheyan
+      // Save user to localStorage
       localStorage.setItem("user", JSON.stringify(user));
 
       toast.success("Login Successful!", { autoClose: 1500 });
 
-     setTimeout(() => {
-        if (user.role === "admin") navigate("/admin");
-        else navigate("/");
+      // ✅ FIXED ADMIN CHECK (Only this part changed)
+      setTimeout(() => {
+        if (user.isAdmin === true) {
+          navigate("/admin");
+        } else {
+          navigate("/");
+        }
         window.location.reload();
       }, 1200);
 
@@ -68,7 +71,9 @@ export default function Login() {
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block font-medium mb-1 text-gray-700">Email</label>
+              <label className="block font-medium mb-1 text-gray-700">
+                Email
+              </label>
               <input
                 type="email"
                 required
@@ -80,7 +85,9 @@ export default function Login() {
             </div>
 
             <div>
-              <label className="block font-medium mb-1 text-gray-700">Password</label>
+              <label className="block font-medium mb-1 text-gray-700">
+                Password
+              </label>
               <input
                 type="password"
                 required

@@ -16,7 +16,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <AuthProvider>
     <WishlistProvider>
        <CartProvider>
+        
       <App />
+      
       </CartProvider>
     </WishlistProvider>
 </AuthProvider>

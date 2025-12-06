@@ -1,15 +1,15 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FaHeart, FaShoppingCart, FaTruck, FaUser } from "react-icons/fa";
 import { useState, useEffect } from "react";
-import { useWishlist } from "../context/WishlistContext"; 
-import { useCart } from "../context/CartContext"; 
+import { useWishlist } from "../context/WishlistContext";
+import { useCart } from "../context/CartContext";
 
 export default function Header() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { wishlist } = useWishlist(); 
-  const { cart } = useCart(); 
+  const { wishlist } = useWishlist();
+  const { cart } = useCart();
 
   const [activePath, setActivePath] = useState(location.pathname);
   const [loggedIn, setLoggedIn] = useState(false);
@@ -22,13 +22,6 @@ export default function Header() {
     setLoggedIn(!!user);
     setLoggedInUser(user);
   }, [location.pathname]);
-
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    setLoggedIn(false);
-    setLoggedInUser(null);
-    navigate("/login");
-  };
 
   const navLinks = [
     { path: "/", text: "HOME" },
@@ -92,7 +85,7 @@ export default function Header() {
     },
     { icon: <FaTruck size={20} />, path: "/Shipping", title: "Shipping" },
 
-    // ⭐ ADDED — Profile Icon (Only if logged in)
+    // ⭐ Profile icon only if logged in
     ...(loggedIn
       ? [
           {
@@ -182,6 +175,7 @@ export default function Header() {
           </div>
         ))}
 
+        {/* 👤 If logged in → show only username (NO LOGOUT) */}
         {loggedIn ? (
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
             <span
@@ -193,21 +187,6 @@ export default function Header() {
             >
               Hi, {loggedInUser?.name}
             </span>
-
-            <button
-              onClick={handleLogout}
-              style={{
-                padding: "6px 16px",
-                background: "red",
-                border: "none",
-                borderRadius: "18px",
-                color: "#fff",
-                fontWeight: "600",
-                cursor: "pointer",
-              }}
-            >
-              Logout
-            </button>
           </div>
         ) : (
           <button

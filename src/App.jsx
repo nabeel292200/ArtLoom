@@ -3,7 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 // Components
 import Header from "./components/Header";
 
-// Pages
+// User Pages
 import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
 import About from "./pages/About";
@@ -18,13 +18,13 @@ import ProductDetail from "./pages/productdetails";
 import Payment from "./pages/Payment";
 import ProfilePage from "./pages/profile";
 
-// Admin pages
-import AdminAddproduct from "./pages/admin/adminAddproduct";
-import Admindashbord from "./pages/admin/admindashbord";
-import Adminhome from "./pages/admin/adminhome";
-import Adminorder from "./pages/admin/adminorder";
-import Adminproduct from "./pages/admin/adminproduct";
-import Adminuser from "./pages/admin/adminuser";
+// Admin Pages
+import AdminDashboard from "./admin/admindashboard";
+import AdminOrders from "./admin/adminorders";
+import AdminProducts from "./admin/adminproducts";
+import AdminUsers from "./admin/adminusers";
+import AdminSidebar from "./admin/adminsidebar";
+import PrivateAdmin from "./admin/privateadmin";
 
 // Toast
 import { ToastContainer } from "react-toastify";
@@ -33,27 +33,20 @@ import "react-toastify/dist/ReactToastify.css";
 export default function App() {
   const location = useLocation();
 
-  // Hide header for login, register, and admin pages
-  const hideHeaderRoutes = [
-    "/login",
-    "/Register",
-    "/admin",
-    "/admin/adminhome",
-    "/admin/addproduct",
-    "/admin/products",
-    "/admin/orders",
-    "/admin/users"
-  ];
-
-  const shouldHideHeader = hideHeaderRoutes.includes(location.pathname);
+  // Hide header on login, register, admin routes
+  const hideHeaderRoutes = ["/login", "/register"];
+  const isAdminRoute = location.pathname.startsWith("/admin");
+  const shouldHideHeader = hideHeaderRoutes.includes(location.pathname) || isAdminRoute;
 
   return (
     <div>
+      {/* Header only for user pages */}
       {!shouldHideHeader && <Header />}
 
       <ToastContainer position="top-right" autoClose={2000} />
 
       <Routes>
+        {/* USER ROUTES */}
         <Route path="/" element={<Home />} />
         <Route path="/Gallery" element={<Gallery />} />
         <Route path="/About" element={<About />} />
@@ -69,12 +62,61 @@ export default function App() {
         <Route path="/profile" element={<ProfilePage />} />
 
         {/* ADMIN ROUTES */}
-        <Route path="/admin" element={<Admindashbord />} />
-        <Route path="adminhome" element={<Adminhome />} />
-        <Route path="adminAddproduct" element={<AdminAddproduct />} />
-        <Route path="adminproduct" element={<Adminproduct />} />
-        <Route path="/admin/orders" element={<Adminorder />} />
-        <Route path="/admin/users" element={<Adminuser />} />
+        <Route
+          path="/admin"
+          element={
+            <PrivateAdmin>
+              <div className="flex">
+                <AdminSidebar />
+                <div className="flex-1 p-6">
+                  <AdminDashboard />
+                </div>
+              </div>
+            </PrivateAdmin>
+          }
+        />
+
+        <Route
+          path="/admin/orders"
+          element={
+            <PrivateAdmin>
+              <div className="flex">
+                <AdminSidebar />
+                <div className="flex-1 p-6">
+                  <AdminOrders />
+                </div>
+              </div>
+            </PrivateAdmin>
+          }
+        />
+
+        <Route
+          path="/admin/products"
+          element={
+            <PrivateAdmin>
+              <div className="flex">
+                <AdminSidebar />
+                <div className="flex-1 p-6">
+                  <AdminProducts />
+                </div>
+              </div>
+            </PrivateAdmin>
+          }
+        />
+
+        <Route
+          path="/admin/users"
+          element={
+            <PrivateAdmin>
+              <div className="flex">
+                <AdminSidebar />
+                <div className="flex-1 p-6">
+                  <AdminUsers />
+                </div>
+              </div>
+            </PrivateAdmin>
+          }
+        />
       </Routes>
     </div>
   );
