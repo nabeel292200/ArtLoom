@@ -1,28 +1,22 @@
 {
   "users": [
     {
-      "id": "1",
-      "name": "John Doe",
-      "email": "john@example.com",
-      "password": "123456",
-      "status": "blocked",
-      "isAdmin": true
-    },
-    {
       "id": "bd6a",
       "name": "mishal",
       "email": "m@gmail.com",
       "password": "m",
-      "isAdmin": true,
-      "status": "active"
+      "isAdmin": false,
+      "status": "active",
+      "updatedAt": "2025-12-06T17:16:34.996Z"
     },
     {
       "id": "6161",
       "name": "muhammednabeel",
       "email": "nabeel@gmail.com",
       "password": "nn",
-      "status": "active",
-      "isAdmin": false
+      "status": "inactive",
+      "isAdmin": false,
+      "updatedAt": "2025-12-06T17:22:13.150Z"
     },
     {
       "id": "9e5d",
@@ -30,14 +24,17 @@
       "email": "w@gmail.com",
       "password": "w",
       "status": "blocked",
-      "isAdmin": false
+      "isAdmin": false,
+      "updatedAt": "2025-12-06T17:22:07.622Z"
     },
     {
       "id": "aed3",
       "name": "ashfak",
       "email": "a@gmail.com",
       "password": "a",
-      "status": "inactive"
+      "status": "inactive",
+      "isAdmin": false,
+      "updatedAt": "2025-12-06T17:22:05.886Z"
     },
     {
       "id": "92c9",
@@ -47,7 +44,18 @@
       "role": "admin",
       "status": "active",
       "address": "",
-      "isAdmin": true
+      "isAdmin": true,
+      "updatedAt": "2025-12-06T17:22:10.685Z"
+    },
+    {
+      "id": "8b99",
+      "name": "anzil",
+      "email": "an@gmail.com",
+      "password": "an",
+      "role": "user",
+      "status": "active",
+      "isAdmin": true,
+      "updatedAt": "2025-12-06T17:22:02.470Z"
     }
   ],
   "products": [
@@ -56,11 +64,12 @@
       "title": "Sunlit Garden",
       "author": "Lorenzo Moretti",
       "category": "Impressionism",
-      "price": "1800",
+      "price": 1800,
       "place": "Florence, Italy",
       "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825672.jpg?t=st=1763980027~exp=1763983627~hmac=4d0335d7708bfbd6ef883c0df54fb3f5b70f852903550f9bfa5f2994a29bbfab&w=2000",
       "description": "A warm and vibrant impressionist painting capturing the golden sunlight over a peaceful Italian garden.",
-      "stock": 10
+      "stock": 7,
+      "updatedAt": "2025-12-06T17:35:16.062Z"
     },
     {
       "id": "2",
@@ -71,7 +80,8 @@
       "place": "Osaka, Japan",
       "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825727.jpg?t=st=1763983415~exp=1763987015~hmac=11f4155c06a8007f8e157e0bffcd6d43ad1f519f89518e1b7de19387ff6fb3c7&w=2000",
       "description": "A minimal yet powerful expression of calm waves using cool tones and abstract strokes.",
-      "stock": 6
+      "stock": 5,
+      "updatedAt": "2025-12-06T17:35:41.050Z"
     },
     {
       "id": "3",
@@ -82,7 +92,8 @@
       "place": "Moscow, Russia",
       "image": "https://img.freepik.com/free-photo/enchanting-watercolor-fairy-illustration_23-2151557302.jpg?t=st=1763983610~exp=1763987210~hmac=f784bc0d8fb25726ba6cd214cd7f6e480ddd715350a2ac4540472e24bacbec32&w=740",
       "description": "A realistic street-view painting portraying autumn colors and quiet evening lights.",
-      "stock": 0
+      "stock": 0,
+      "updatedAt": "2025-12-06T17:35:24.429Z"
     },
     {
       "id": "4",
@@ -93,7 +104,8 @@
       "place": "Madrid, Spain",
       "image": "https://img.freepik.com/free-photo/sea-landscape-with-digital-art-style_23-2151158404.jpg?t=st=1763983685~exp=1763987285~hmac=ddc76d2c0fdd73cf37c4364081a2c531a8004961bd27cddaf904a4845d42e51b&w=2000",
       "description": "A bold abstract piece exploring emotional contrasts through red and dark geometric shapes.",
-      "stock": -2
+      "stock": 1,
+      "updatedAt": "2025-12-06T17:35:16.063Z"
     },
     {
       "id": "5",
@@ -104,7 +116,8 @@
       "place": "Paris, France",
       "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825715.jpg?t=st=1763983742~exp=1763987342~hmac=fea1ba63160ac864c58401350f175524e6a1ec0f7f59a28f4dfb15aa07ceb0a9&w=1480",
       "description": "Soft contemporary gradients and layered brush textures create a soothing blue composition.",
-      "stock": -1
+      "stock": 1,
+      "updatedAt": "2025-12-06T17:35:16.064Z"
     },
     {
       "id": "6",
@@ -115,7 +128,8 @@
       "place": "Stockholm, Sweden",
       "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825723.jpg?t=st=1763983814~exp=1763987414~hmac=6ba48baf62318c56858efe829f847374866e91096f6ddb38474a81bf205f8c18&w=1480",
       "description": "A mystical depiction of Scandinavian forests blending realism with fantasy elements.",
-      "stock": -6
+      "stock": 4,
+      "updatedAt": "2025-12-06T17:35:16.064Z"
     },
     {
       "id": "7",
@@ -125,7 +139,9 @@
       "price": 3000,
       "place": "Dubai, UAE",
       "image": "https://img.freepik.com/free-photo/illustrated-watercolor-city_23-2151768925.jpg?t=st=1763983882~exp=1763987482~hmac=65eda5eaaa9da7de37fc4f405af3023f72d4ca416c00048363e57f8e3e3d17eb&w=2000",
-      "description": "A surreal vision of a golden desert mirage merging dreamlike shapes with shifting sands."
+      "description": "A surreal vision of a golden desert mirage merging dreamlike shapes with shifting sands.",
+      "stock": 1,
+      "updatedAt": "2025-12-06T17:35:16.065Z"
     },
     {
       "id": "8",
@@ -135,7 +151,9 @@
       "price": 1400,
       "place": "Prague, Czech Republic",
       "image": "https://img.freepik.com/free-photo/young-shepherds-watching-sunset_23-2152031672.jpg?t=st=1763983956~exp=1763987556~hmac=2835632d4e62a4e01a7c876fd265653e0075187e60810540fbda6a9dc0f5c8f3&w=2000",
-      "description": "Energetic strokes and bright contrasts bring the rhythm of city life onto the canvas."
+      "description": "Energetic strokes and bright contrasts bring the rhythm of city life onto the canvas.",
+      "stock": 1,
+      "updatedAt": "2025-12-06T17:35:16.065Z"
     },
     {
       "id": "9",
@@ -145,7 +163,9 @@
       "price": 2100,
       "place": "Athens, Greece",
       "image": "https://img.freepik.com/premium-photo/street-scene-love-couple-colorful-oil-painting-old-style-drawing-technique-art-hd-print-neo-art_1164035-19.jpg?w=2000",
-      "description": "A peaceful representation of mountain ranges at dawn with soft pastel colors."
+      "description": "A peaceful representation of mountain ranges at dawn with soft pastel colors.",
+      "stock": 1,
+      "updatedAt": "2025-12-06T17:35:16.066Z"
     },
     {
       "id": "10",
@@ -156,7 +176,8 @@
       "place": "Venice, Italy",
       "image": "https://img.freepik.com/premium-photo/acrylic-painting-boys-swimming_961875-422142.jpg?w=2000",
       "description": "A dreamy night-sky fantasy painting filled with glowing stars and mystical silhouettes.",
-      "stock": null
+      "stock": 1,
+      "updatedAt": "2025-12-06T17:35:16.066Z"
     },
     {
       "id": "11",
@@ -167,7 +188,8 @@
       "place": "Seoul, South Korea",
       "image": "https://img.freepik.com/premium-photo/joy-is-journey-wallpaper_1148167-79584.jpg?w=2000",
       "description": "A colorful emotional artwork blending vibrant shapes and fantasies in expressive style.",
-      "stock": null
+      "stock": 1,
+      "updatedAt": "2025-12-06T17:35:16.067Z"
     },
     {
       "id": "12",
@@ -177,7 +199,9 @@
       "price": 2800,
       "place": "Lisbon, Portugal",
       "image": "https://img.freepik.com/premium-photo/girl-painting-autumn-scenery-wall_1148167-98983.jpg?w=2000",
-      "description": "An inspiring fantasy angel art symbolizing hope and freedom through radiant light wings."
+      "description": "An inspiring fantasy angel art symbolizing hope and freedom through radiant light wings.",
+      "stock": 1,
+      "updatedAt": "2025-12-06T17:35:16.067Z"
     }
   ],
   "orders": [
@@ -328,42 +352,6 @@
       "status": "Pending",
       "paymentMethod": "cod",
       "createdAt": "2025-11-28T10:52:41.890Z"
-    },
-    {
-      "id": "dc4e",
-      "userId": "bd6a",
-      "user": "mishal",
-      "email": "m@gmail.com",
-      "items": [
-        {
-          "id": "1",
-          "title": "Sunlit Garden",
-          "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825672.jpg?t=st=1763980027~exp=1763983627~hmac=4d0335d7708bfbd6ef883c0df54fb3f5b70f852903550f9bfa5f2994a29bbfab&w=2000",
-          "price": 1800,
-          "qty": 2
-        }
-      ],
-      "status": "Cancelled",
-      "paymentMethod": "cod",
-      "createdAt": "2025-11-28T11:00:27.171Z"
-    },
-    {
-      "id": "6b18",
-      "userId": "bd6a",
-      "user": "mishal",
-      "email": "m@gmail.com",
-      "items": [
-        {
-          "id": "1",
-          "title": "Sunlit Garden",
-          "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825672.jpg?t=st=1763980027~exp=1763983627~hmac=4d0335d7708bfbd6ef883c0df54fb3f5b70f852903550f9bfa5f2994a29bbfab&w=2000",
-          "price": 1800,
-          "qty": 1
-        }
-      ],
-      "status": "Pending",
-      "paymentMethod": "cod",
-      "createdAt": "2025-11-29T03:23:54.306Z"
     },
     {
       "id": "2634",
@@ -522,9 +510,51 @@
           "qty": 1
         }
       ],
-      "status": "Pending",
+      "status": "Delivered",
       "paymentMethod": "cod",
-      "createdAt": "2025-12-05T03:48:55.436Z"
+      "createdAt": "2025-12-05T03:48:55.436Z",
+      "updatedAt": "2025-12-06T16:44:30.828Z"
+    },
+    {
+      "id": "ecfc",
+      "userId": "8b99",
+      "user": "anzil",
+      "email": "an@gmail.com",
+      "address": {
+        "fullName": "anzil",
+        "phone": "8765349012",
+        "street": "calicut",
+        "city": "11miles",
+        "state": "kerala",
+        "pincode": "324567"
+      },
+      "items": [
+        {
+          "id": "5",
+          "title": "Blue Echo",
+          "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825715.jpg?t=st=1763983742~exp=1763987342~hmac=fea1ba63160ac864c58401350f175524e6a1ec0f7f59a28f4dfb15aa07ceb0a9&w=1480",
+          "price": 1900,
+          "qty": 1
+        },
+        {
+          "id": "3",
+          "title": "Autumn Streets",
+          "image": "https://img.freepik.com/free-photo/enchanting-watercolor-fairy-illustration_23-2151557302.jpg?t=st=1763983610~exp=1763987210~hmac=f784bc0d8fb25726ba6cd214cd7f6e480ddd715350a2ac4540472e24bacbec32&w=740",
+          "price": 1500,
+          "qty": 1
+        },
+        {
+          "id": "1",
+          "title": "Sunlit Garden",
+          "image": "https://img.freepik.com/free-photo/digital-art-style-illustration-river-nature_23-2151825672.jpg?t=st=1763980027~exp=1763983627~hmac=4d0335d7708bfbd6ef883c0df54fb3f5b70f852903550f9bfa5f2994a29bbfab&w=2000",
+          "price": 1800,
+          "qty": 1
+        }
+      ],
+      "status": "Shipped",
+      "paymentMethod": "cod",
+      "createdAt": "2025-12-06T17:21:12.525Z",
+      "updatedAt": "2025-12-06T17:23:35.606Z"
     }
   ]
 }
